@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental Clinic | Premium Service</title>
-    <!-- Google Fonts va FontAwesome ikonkalari -->
+    <title>Dr. Shoxjahon | Premium Dental Clinic</title>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -12,7 +11,7 @@
         :root {
             --apple-bg: #f5f5f7;
             --apple-blue: #0071e3;
-            --apple-glass: rgba(255, 255, 255, 0.7);
+            --apple-glass: rgba(255, 255, 255, 0.75);
             --apple-text: #1d1d1f;
             --apple-text-gray: #86868b;
         }
@@ -32,7 +31,6 @@
             overflow-x: hidden;
         }
 
-        /* Yuqori Glassmorphism Navigatsiya */
         header {
             position: sticky;
             top: 0;
@@ -51,17 +49,16 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .logo-area i {
-            color: var(--apple-blue);
-            font-size: 24px;
+            cursor: pointer;
         }
 
         .logo-area h1 {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #0071e3, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .admin-trigger {
@@ -70,9 +67,9 @@
             color: var(--apple-text-gray);
             font-size: 18px;
             cursor: pointer;
+            padding: 5px;
         }
 
-        /* Asosiy Konteyner va Sahifalar boshqaruvi */
         .container {
             max-width: 500px;
             margin: 0 auto;
@@ -81,39 +78,34 @@
 
         .page {
             display: none;
-            animation: fadeIn 0.4s ease forwards;
         }
 
         .page.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Katta Apple Uslubidagi Vidjetlar (Tugmalar) */
         .hero-card {
             background: white;
             border-radius: 24px;
             padding: 30px 24px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .hero-card h2 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
 
         .hero-card p {
             color: var(--apple-text-gray);
             font-size: 15px;
-            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         .apple-btn-large {
@@ -121,15 +113,14 @@
             align-items: center;
             justify-content: space-between;
             background: white;
-            border: 1px solid rgba(0,0,0,0.04);
-            padding: 24px;
+            border: 1px solid rgba(0,0,0,0.03);
+            padding: 22px;
             border-radius: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
             transition: all 0.2s ease;
             width: 100%;
-            text-align: left;
         }
 
         .apple-btn-large:active {
@@ -140,27 +131,27 @@
         .btn-content {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
 
         .btn-icon {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .bg-blue { background: #e3f2fd; color: #0071e3; }
-        .bg-green { background: #e8f5e9; color: #34c759; }
         .bg-purple { background: #f3e5f5; color: #af52de; }
         .bg-orange { background: #fff3e0; color: #ff9500; }
 
         .btn-title {
             font-size: 17px;
             font-weight: 600;
+            color: var(--apple-text);
         }
 
         .btn-desc {
@@ -171,12 +162,11 @@
 
         .apple-btn-large i.fa-chevron-right {
             color: #c7c7cc;
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        /* Form dizayni */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
@@ -185,7 +175,6 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--apple-text);
-            padding-left: 4px;
         }
 
         .apple-input, select {
@@ -196,11 +185,11 @@
             background: white;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.2s;
         }
 
-        .apple-input:focus, select:focus {
-            border-color: var(--apple-blue);
+        .flex-inputs {
+            display: flex;
+            gap: 10px;
         }
 
         .submit-btn {
@@ -208,7 +197,7 @@
             color: white;
             width: 100%;
             padding: 16px;
-            border-radius: 14px;
+            border-radius: 30px;
             border: none;
             font-size: 16px;
             font-weight: 600;
@@ -216,25 +205,19 @@
             margin-top: 10px;
         }
 
-        .submit-btn:active {
-            opacity: 0.9;
-        }
-
-        /* Orqaga qaytish tugmasi */
         .back-btn {
             background: none;
             border: none;
             color: var(--apple-blue);
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             margin-bottom: 20px;
             cursor: pointer;
         }
 
-        /* Pastki navigatsiya (Menu) */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -258,52 +241,46 @@
             background: none;
             border: none;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
             gap: 4px;
             cursor: pointer;
-            width: 20%;
+            width: 25%;
         }
 
-        .nav-item i {
-            font-size: 20px;
-        }
+        .nav-item i { font-size: 19px; }
+        .nav-item.active { color: var(--apple-blue); }
 
-        .nav-item.active {
-            color: var(--apple-blue);
-        }
-
-        /* Admin va Ro'yxat dizayni */
         .admin-card {
             background: white;
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 18px;
+            padding: 18px;
             margin-bottom: 12px;
             border: 1px solid rgba(0,0,0,0.03);
         }
 
-        .admin-card h4 { font-size: 16px; margin-bottom: 5px; }
-        .admin-card p { font-size: 14px; color: var(--apple-text-gray); }
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 8px;
-            background: #e3f2fd;
-            color: #0071e3;
-        }
+        .info-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.04); font-size: 15px; }
+        .info-row:last-child { border: none; padding-bottom: 0; }
+        .info-label { color: var(--apple-text-gray); font-weight: 500; }
+        .info-value { color: var(--apple-text); font-weight: 600; }
+
+        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .action-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(0, 0, 0, 0.04); color: #1d1d1f; padding: 14px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        
+        .tab-menu { display: flex; gap: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.05); padding: 5px; border-radius: 10px; }
+        .tab-btn { flex: 1; padding: 8px; border: none; background: none; border-radius: 7px; font-weight: 600; cursor: pointer; font-size: 13px; }
+        .tab-btn.active { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
 
-    <!-- Top Header -->
     <header>
         <div class="logo-area" onclick="switchPage('home')">
-            <i class="fa-solid fa-tooth"></i>
-            <h1>Dental Clinic</h1>
+            <i class="fa-solid fa-tooth" style="color:var(--apple-blue); font-size:22px;"></i>
+            <h1 id="siteTitleDisplay">Dr. Shoxjahon</h1>
         </div>
-        <button class="admin-trigger" onclick="checkAdmin()"><i class="fa-solid fa-lock"></i></button>
+        <button class="admin-trigger" onclick="checkAdmin()"><i class="fa-solid fa-user-gear"></i></button>
     </header>
 
     <div class="container">
@@ -311,16 +288,16 @@
         <!-- 1. BOSH SAHIFA -->
         <div id="home" class="page active">
             <div class="hero-card">
-                <h2>Sog'lom tabassum — go'zal hayot garovi</h2>
-                <p>Apple darajasidagi qulaylik va eng yuqori sifatli stomatologiya xizmatlari siz uchun.</p>
+                <h2 id="mainHeadingDisplay">Mukammal Tabassum</h2>
+                <p id="mainDescDisplay">Premium darajadagi zamonaviy, og'riqsiz stomatologiya xizmati.</p>
             </div>
 
             <button class="apple-btn-large" onclick="switchPage('booking')">
                 <div class="btn-content">
                     <div class="btn-icon bg-blue"><i class="fa-solid fa-calendar-check"></i></div>
-                    <div>
+                    <div style="text-align: left;">
                         <div class="btn-title">Onlayn Navbat</div>
-                        <div class="btn-desc">Shifokor ko'rigiga joy band qilish</div>
+                        <div class="btn-desc">Klinikaga onlayn joy band qilish</div>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -329,9 +306,9 @@
             <button class="apple-btn-large" onclick="switchPage('services')">
                 <div class="btn-content">
                     <div class="btn-icon bg-purple"><i class="fa-solid fa-hand-holding-medical"></i></div>
-                    <div>
-                        <div class="btn-title">Xizmatlarimiz</div>
-                        <div class="btn-desc">Narxlar va muolajalar ro'yxati</div>
+                    <div style="text-align: left;">
+                        <div class="btn-title">Xizmatlar va Narxlar</div>
+                        <div class="btn-desc">Muolajalar turi va narxlari</div>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -339,10 +316,10 @@
 
             <button class="apple-btn-large" onclick="switchPage('contacts')">
                 <div class="btn-content">
-                    <div class="btn-icon bg-orange"><i class="fa-solid fa-phone"></i></div>
-                    <div>
-                        <div class="btn-title">Kontaktlar</div>
-                        <div class="btn-desc">Manzil, telefon va ish vaqtlari</div>
+                    <div class="btn-icon bg-orange"><i class="fa-solid fa-location-dot"></i></div>
+                    <div style="text-align: left;">
+                        <div class="btn-title">Klinika Haqida</div>
+                        <div class="btn-desc">Manzil, kontaktlar va ish vaqti</div>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -353,183 +330,311 @@
         <div id="booking" class="page">
             <button class="back-btn" onclick="switchPage('home')"><i class="fa-solid fa-chevron-left"></i> Orqaga</button>
             <div class="hero-card" style="padding:20px; text-align:left; margin-bottom:15px;">
-                <h3 style="font-size:20px;">Navbat olish shakli</h3>
-                <p style="margin-bottom:0;">Ma'lumotlarni to'ldiring, biz sizga aloqaga chiqamiz.</p>
+                <h3 style="font-size:20px; font-weight:700;">Smart Joy Band Etish</h3>
+                <p style="margin-bottom:0; font-size:14px; color:gray;">Ma'lumotlarni kiriting, navbatingiz botga yuboriladi.</p>
             </div>
 
             <form id="appointmentForm" onsubmit="sendData(event)">
                 <div class="form-group">
-                    <label>Ism va Familiyangiz</label>
+                    <label>Ismingiz va Familiyangiz</label>
                     <input type="text" id="userName" class="apple-input" placeholder="Masalan: Aziz Rahimov" required>
                 </div>
                 <div class="form-group">
                     <label>Telefon raqamingiz</label>
-                    <input type="tel" id="userPhone" class="apple-input" value="+998" required>
+                    <input type="tel" id="userPhone" class="apple-input" value="+998 " required>
                 </div>
                 <div class="form-group">
                     <label>Xizmat turi</label>
-                    <select id="serviceType">
-                        <option>Konsultatsiya (Ko'rik)</option>
-                        <option>Tishni davolash (Plomba)</option>
-                        <option>Implantatsiya / Protez</option>
-                        <option>Tishlarni oqartirish</option>
-                        <option>Breket tizimlari</option>
+                    <select id="serviceTypeSelect">
+                        <!-- Admin paneldagi xizmatlar avtomat yuklanadi -->
                     </select>
                 </div>
-                <button type="submit" class="submit-btn">Navbatni tasdiqlash</button>
+                <div class="form-group">
+                    <label>Sana va Vaqt</label>
+                    <div class="flex-inputs">
+                        <input type="date" id="bookDate" class="apple-input" required>
+                        <input type="time" id="bookTime" class="apple-input" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Navbatga yozilish</button>
             </form>
         </div>
 
         <!-- 3. XIZMATLAR SAHIFASI -->
         <div id="services" class="page">
             <button class="back-btn" onclick="switchPage('home')"><i class="fa-solid fa-chevron-left"></i> Orqaga</button>
-            <h3 style="font-size: 22px; margin-bottom: 15px; font-weight:700;">Bizning Xizmatlar</h3>
+            <h3 style="font-size: 22px; margin-bottom: 15px; font-weight:700;">Xizmat ko'rsatish va Narxlar</h3>
             
-            <div class="hero-card" style="text-align:left; padding:18px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                <div><strong>Stomatologiya ko'rigi</strong><div style="font-size:13px; color:gray;">Umumiy diagnostika</div></div>
-                <div style="color:var(--apple-blue); font-weight:700;">Bepul</div>
+            <div class="admin-card" id="servicesListDisplay">
+                <!-- Narxlar ro'yxati shu yerda chiqadi -->
             </div>
-            <div class="hero-card" style="text-align:left; padding:18px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                <div><strong>Tish davolash (Gelyoviy plomba)</strong><div style="font-size:13px; color:gray;">Sifatli materiallar bilan</div></div>
-                <div style="color:var(--apple-blue); font-weight:700;">150 000 so'mdan</div>
-            </div>
-            <div class="hero-card" style="text-align:left; padding:18px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                <div><strong>Tish tozalash va Oqartirish</strong><div style="font-size:13px; color:gray;">Ultratovush yordamida</div></div>
-                <div style="color:var(--apple-blue); font-weight:700;">200 000 so'm</div>
-            </div>
+            <button class="submit-btn" onclick="switchPage('booking')" style="margin-top:15px;">Hoziroq joy band qilish</button>
         </div>
 
         <!-- 4. KONTAKTLAR SAHIFASI -->
         <div id="contacts" class="page">
             <button class="back-btn" onclick="switchPage('home')"><i class="fa-solid fa-chevron-left"></i> Orqaga</button>
-            <div class="hero-card">
-                <div class="btn-icon bg-orange" style="margin: 0 auto 15px;"><i class="fa-solid fa-location-dot"></i></div>
-                <h3>Bizning Manzil</h3>
-                <p>Toshkent shahri, Chilonzor tumani, 9-kvartal</p>
-                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-                <div class="btn-icon bg-blue" style="margin: 0 auto 15px;"><i class="fa-solid fa-clock"></i></div>
-                <h3>Ish Vaqti</h3>
-                <p>Dushanba - Shanba: 09:00 - 18:00<br>Yakkaqonlik: Dam olish kuni</p>
+            
+            <div class="admin-card">
+                <h3 style="margin-bottom:15px; font-weight:700;">✨ Shifokor Ma'lumotlari</h3>
+                <div class="info-row"><span class="info-label">Bosh shifokor:</span><span class="info-value" id="doctorNameDisplay">Dr. Shoxjahon Latifova</span></div>
+                <div class="info-row"><span class="info-label">Ish vaqti:</span><span class="info-value" id="workTimeDisplay">7:00 - 19:00</span></div>
+                <div class="info-row"><span class="info-label">Telefon:</span><span class="info-value" id="clinicPhoneDisplay">+998919677750</span></div>
+            </div>
+
+            <div class="admin-card" style="text-align: center;">
+                <h3 style="font-weight:700; margin-bottom:15px;">📍 Tezkor aloqa</h3>
+                <div class="action-grid">
+                    <a id="phoneLink" href="tel:+998919677750" class="action-btn" style="background:#e8f5e9; color:#34c759;"><i class="fa-solid fa-phone"></i> Tel</a>
+                    <a href="https://instagram.com/dr_sh_dental_clinic" target="_blank" class="action-btn" style="background:#fce4ec; color:#e91e63;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                </div>
             </div>
         </div>
 
         <!-- 5. ADMIN PANEL SAHIFASI -->
         <div id="adminPanel" class="page">
             <button class="back-btn" onclick="switchPage('home')"><i class="fa-solid fa-chevron-left"></i> Chiqish</button>
-            <h3 style="font-size: 22px; margin-bottom: 15px; font-weight:700;">Kelgan buyurtmalar (Admin)</h3>
-            <div id="ordersList">
-                <p style="color:gray; text-align:center;">Hozircha buyurtmalar yo'q.</p>
+            
+            <div class="tab-menu">
+                <button class="tab-btn active" onclick="switchTab('tabOrders')">Navbatlar</button>
+                <button class="tab-btn" onclick="switchTab('tabSettings')">Sozlamalar (Tahrirlash)</button>
+            </div>
+
+            <!-- TABS 1: NAVBATLAR RO'YXATI -->
+            <div id="tabOrders" class="tab-content active">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h4 style="font-weight:700;">Kelgan buyurtmalar</h4>
+                    <button onclick="clearOrders()" style="color:#ff3b30; background:none; border:none; font-weight:600;">Tozalash</button>
+                </div>
+                <div id="ordersList"></div>
+            </div>
+
+            <!-- TABS 2: SAYT MA'LUMOTLARINI O'ZGARTIRISH -->
+            <div id="tabSettings" class="tab-content">
+                <h4 style="font-weight:700; margin-bottom:15px;">Matnlarni o'zgartirish</h4>
+                
+                <div class="form-group">
+                    <label>Sayt sarlavhasi (Logo o'rnidagi matn)</label>
+                    <input type="text" id="siteTitleInput" class="apple-input">
+                </div>
+                <div class="form-group">
+                    <label>Asosiy katta sarlavha</label>
+                    <input type="text" id="mainHeadingInput" class="apple-input">
+                </div>
+                <div class="form-group">
+                    <label>Klinika ta'rifi</label>
+                    <input type="text" id="mainDescInput" class="apple-input">
+                </div>
+                <div class="form-group">
+                    <label>Shifokor ismi</label>
+                    <input type="text" id="doctorNameInput" class="apple-input">
+                </div>
+                <div class="form-group">
+                    <label>Ish vaqti matni</label>
+                    <input type="text" id="workTimeInput" class="apple-input">
+                </div>
+                <div class="form-group">
+                    <label>Klinika telefon raqami</label>
+                    <input type="text" id="clinicPhoneInput" class="apple-input">
+                </div>
+
+                <h4 style="font-weight:700; margin:25px 0 10px;">Xizmatlar va Narxlar (Har bir qatorga bittadan: Xizmat nomi = Narxi)</h4>
+                <div class="form-group">
+                    <textarea id="servicesTextInput" class="apple-input" rows="6" style="resize:vertical;" placeholder="Tish davolash = 150 000 so'm"></textarea>
+                </div>
+
+                <button class="submit-btn" onclick="saveSettings()" style="background:#34c759;">O'zgarishlarni saqlash</button>
             </div>
         </div>
 
     </div>
 
-    <!-- Bottom App Navigation Bar -->
     <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchPage('home')">
-            <i class="fa-solid fa-house"></i>Asosiy
-        </button>
-        <button class="nav-item" onclick="switchPage('booking')">
-            <i class="fa-solid fa-calendar-days"></i>Navbat
-        </button>
-        <button class="nav-item" onclick="switchPage('services')">
-            <i class="fa-solid fa-list"></i>Xizmatlar
-        </button>
-        <button class="nav-item" onclick="switchPage('contacts')">
-            <i class="fa-solid fa-envelope"></i>Aloqa
-        </button>
+        <button class="nav-item active" onclick="switchPage('home')"><i class="fa-solid fa-house"></i>Asosiy</button>
+        <button class="nav-item" onclick="switchPage('booking')"><i class="fa-solid fa-calendar-days"></i>Navbat</button>
+        <button class="nav-item" onclick="switchPage('services')"><i class="fa-solid fa-tooth"></i>Xizmatlar</button>
+        <button class="nav-item" onclick="switchPage('contacts')"><i class="fa-solid fa-address-book"></i>Aloqa</button>
     </div>
 
     <script>
-        // TELEGRAM BOT SOZLAMALARI (O'zingiznikini qo'yasiz)
+        // 🌟 TELEGRAM SOZLAMALARI
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
         const CHAT_ID = '7017291129'; 
-        const ADMIN_PASSWORD = '123'; // Admin panel paroli
+        const ADMIN_PASSWORD = '123';
 
-        // Sahifalararo o'tish logikasi
+        // Standart (Boshlang'ich) ma'lumotlar bazasi
+        const defaultSettings = {
+            siteTitle: "Dr. Shoxjahon",
+            mainHeading: "Mukammal Tabassum",
+            mainDesc: "Premium darajadagi zamonaviy, og'riqsiz stomatologiya xizmati.",
+            doctorName: "Dr. Shoxjahon Latifova",
+            workTime: "7:00 - 19:00",
+            clinicPhone: "+998919677750",
+            servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan\nBreket tizimlari = 1 500 000 so'mdan\nTishlarni oqartirish = 300 000 so'm"
+        };
+
+        let currentSettings = JSON.parse(localStorage.getItem('dental_settings')) || defaultSettings;
+        let orders = JSON.parse(localStorage.getItem('dental_orders')) || [];
+
+        // Sahifani yuklashda ma'lumotlarni joy-joyiga qo'yish
+        function updateDOM() {
+            document.getElementById('siteTitleDisplay').innerText = currentSettings.siteTitle;
+            document.getElementById('mainHeadingDisplay').innerText = currentSettings.mainHeading;
+            document.getElementById('mainDescDisplay').innerText = currentSettings.mainDesc;
+            document.getElementById('doctorNameDisplay').innerText = currentSettings.doctorName;
+            document.getElementById('workTimeDisplay').innerText = currentSettings.workTime;
+            document.getElementById('clinicPhoneDisplay').innerText = currentSettings.clinicPhone;
+            document.getElementById('phoneLink').href = "tel:" + currentSettings.clinicPhone;
+
+            // Xizmatlar ro'yxatini va Select darchasini yangilash
+            const listDisplay = document.getElementById('servicesListDisplay');
+            const selectElement = document.getElementById('serviceTypeSelect');
+            
+            listDisplay.innerHTML = '';
+            selectElement.innerHTML = '';
+
+            const lines = currentSettings.servicesText.split('\n');
+            lines.forEach(line => {
+                if(line.includes('=')) {
+                    const parts = line.split('=');
+                    const name = parts[0].trim();
+                    const price = parts[1].trim();
+
+                    listDisplay.innerHTML += `<div class="info-row"><span class="info-label">${name}</span><span class="info-value">${price}</span></div>`;
+                    selectElement.innerHTML += `<option>${name}</option>`;
+                }
+            });
+        }
+
+        // Admin sozlamalar oynasini to'ldirish
+        function loadSettingsToInputs() {
+            document.getElementById('siteTitleInput').value = currentSettings.siteTitle;
+            document.getElementById('mainHeadingInput').value = currentSettings.mainHeading;
+            document.getElementById('mainDescInput').value = currentSettings.mainDesc;
+            document.getElementById('doctorNameInput').value = currentSettings.doctorName;
+            document.getElementById('workTimeInput').value = currentSettings.workTime;
+            document.getElementById('clinicPhoneInput').value = currentSettings.clinicPhone;
+            document.getElementById('servicesTextInput').value = currentSettings.servicesText;
+        }
+
+        // Sozlamalarni saqlash funksiyasi
+        function saveSettings() {
+            currentSettings.siteTitle = document.getElementById('siteTitleInput').value;
+            currentSettings.mainHeading = document.getElementById('mainHeadingInput').value;
+            currentSettings.mainDesc = document.getElementById('mainDescInput').value;
+            currentSettings.doctorName = document.getElementById('doctorNameInput').value;
+            currentSettings.workTime = document.getElementById('workTimeInput').value;
+            currentSettings.clinicPhone = document.getElementById('clinicPhoneInput').value;
+            currentSettings.servicesText = document.getElementById('servicesTextInput').value;
+
+            localStorage.setItem('dental_settings', JSON.stringify(currentSettings));
+            updateDOM();
+            alert("✅ Sayt ma'lumotlari muvaffaqiyatli o'zgartirildi!");
+            switchPage('home');
+        }
+
         function switchPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
-            // Aktiv menyu rangini o'zgartirish
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if(pageId === 'home') document.querySelectorAll('.nav-item')[0].classList.add('active');
             if(pageId === 'booking') document.querySelectorAll('.nav-item')[1].classList.add('active');
             if(pageId === 'services') document.querySelectorAll('.nav-item')[2].classList.add('active');
             if(pageId === 'contacts') document.querySelectorAll('.nav-item')[3].classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        // Mahalliy xotirada buyurtmalarni saqlash (Admin uchun)
-        let orders = JSON.parse(localStorage.getItem('clinic_orders')) || [];
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
 
-        // Telefon raqamni avtomat +998 qilib to'g'rilash
-        const phoneInput = document.getElementById('userPhone');
-        phoneInput.addEventListener('input', function() {
-            if (!this.value.startsWith('+998')) {
-                this.value = '+998';
-            }
+        // Telefon formatlash
+        const telInput = document.getElementById('userPhone');
+        telInput.addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            if (!x[1]) { e.target.value = '+998 '; return; }
+            e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // Telegramga ma'lumot yuborish va bazaga saqlash
         function sendData(e) {
             e.preventDefault();
-            
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Yuborilmoqda...";
+
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
-            const service = document.getElementById('serviceType').value;
-            const date = new Date().toLocaleString('uz-UZ');
+            const service = document.getElementById('serviceTypeSelect').value;
+            const date = document.getElementById('bookDate').value;
+            const time = document.getElementById('bookTime').value;
 
-            const newOrder = { name, phone, service, date };
+            const newOrder = { name, phone, service, date, time };
             orders.push(newOrder);
-            localStorage.setItem('clinic_orders', JSON.stringify(orders));
+            localStorage.setItem('dental_orders', JSON.stringify(orders));
 
-            // Telegram xabari matni
-            const message = `🔔 YANGI NAVBAT!\n\n👤 Bemor: ${name}\n📞 Tel: ${phone}\n🦷 Xizmat: ${service}\n⏰ Vaqt: ${date}`;
+            const xabar = `🔔 **YANGI NAVBAT!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date} | ${time}`;
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
             })
-            .then(res => {
-                alert('Muvaffaqiyatli! Navbatingiz qabul qilindi.');
+            .then(() => {
+                alert('✅ Navbatingiz muvaffaqiyatli qabul qilindi!');
                 document.getElementById('appointmentForm').reset();
-                document.getElementById('userPhone').value = '+998';
+                document.getElementById('userPhone').value = '+998 ';
+                btn.innerText = "Navbatga yozilish";
                 switchPage('home');
             })
-            .catch(err => alert('Xatolik yuz berdi. Internetni tekshiring.'));
+            .catch(() => {
+                alert('Aloqa xatoligi!');
+                btn.innerText = "Navbatga yozilish";
+            });
         }
 
-        // Admin panelga kirish tekshiruvi
         function checkAdmin() {
             const pass = prompt('Admin parolini kiriting:');
             if (pass === ADMIN_PASSWORD) {
                 renderOrders();
+                loadSettingsToInputs();
                 switchPage('adminPanel');
             } else if (pass !== null) {
-                alert('Parol noto'g'ri!');
+                alert('Parol noto\'g\'ri!');
             }
         }
 
-        // Admin panelda buyurtmalarni chiqarish
         function renderOrders() {
             const container = document.getElementById('ordersList');
             if (orders.length === 0) {
-                container.innerHTML = `<p style="color:gray; text-align:center;">Hozircha buyurtmalar yo'q.</p>`;
+                container.innerHTML = `<p style="color:gray; text-align:center; padding:20px 0;">Hozircha navbatlar yo'q.</p>`;
                 return;
             }
             container.innerHTML = '';
-            orders.reverse().forEach(order => {
+            [...orders].reverse().forEach(o => {
                 container.innerHTML += `
                     <div class="admin-card">
-                        <h4>${order.name}</h4>
-                        <p><strong>Tel:</strong> ${order.phone}</p>
-                        <p><strong>Xizmat:</strong> ${order.service}</p>
-                        <div class="badge">${order.date}</div>
-                    </div>
-                `;
+                        <h4>${o.name}</h4>
+                        <p><strong>Tel:</strong> ${o.phone}</p>
+                        <p><strong>Xizmat:</strong> ${o.service}</p>
+                        <div class="badge"><i class="fa-solid fa-clock"></i> ${o.date} | ${o.time}</div>
+                    </div>`;
             });
         }
+
+        function clearOrders() {
+            if(confirm("Hamma navbatlarni o'chirmoqchimisiz?")) {
+                orders = [];
+                localStorage.removeItem('dental_orders');
+                renderOrders();
+            }
+        }
+
+        // Dasturni ishga tushirish
+        updateDOM();
+        const bugun = new Date().toISOString().split('T')[0];
+        document.getElementById('bookDate').setAttribute('min', bugun);
     </script>
 </body>
 </html>
