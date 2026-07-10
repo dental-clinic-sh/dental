@@ -32,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Ikonkalar uchun SVG Helper */
         .icon {
             width: 22px;
             height: 22px;
@@ -101,7 +100,6 @@
             display: block;
         }
 
-        /* Zamonaviy Banner */
         .hero-banner {
             background: linear-gradient(145deg, #ffffff, #fbfbfd);
             border-radius: var(--card-radius);
@@ -142,7 +140,6 @@
             border-left: 4px solid var(--apple-blue);
         }
 
-        /* Apple Uslubidagi Katta Tugmalar */
         .apple-card-btn {
             display: flex;
             align-items: center;
@@ -196,7 +193,6 @@
             text-align: left;
         }
 
-        /* Formalar va Kiritish darchalari */
         .form-group {
             margin-bottom: 16px;
         }
@@ -262,7 +258,6 @@
             cursor: pointer;
         }
 
-        /* Pastki Navigatsiya Panel */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -294,7 +289,6 @@
 
         .nav-item.active { color: var(--apple-blue); font-weight: 600; }
 
-        /* Bloklar va Ro'yxatlar */
         .info-card {
             background: white;
             border-radius: var(--card-radius);
@@ -343,57 +337,10 @@
             justify-content: center;
             color: white;
         }
-
-        /* Admin Panel qismlari */
-        .tab-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            background: rgba(0,0,0,0.04);
-            padding: 4px;
-            border-radius: 12px;
-        }
-        .tab-item {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            background: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            color: var(--apple-text-gray);
-        }
-        .tab-item.active {
-            background: white;
-            color: var(--apple-text);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-        }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
-
-        .action-button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .act-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- SVG Ikonkalar To'plami (Rasm yuklanish muammosini yo'qotadi) -->
     <svg style="display: none;">
         <g id="icon-tooth"><path d="M12 2C9.5 2 7.5 3.5 7 6c-.5 2.5-2 4.5-2 7 0 3.5 2 6 4.5 6 1.5 0 2-1 2.5-1s1 1 2.5 1c2.5 0 4.5-2.5 4.5-6 0-2.5-1.5-4.5-2-7-.5-2.5-2.5-4-5-4zm-2 5c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></g>
         <g id="icon-gear"><path d="M19.4 13c0-.3.1-.6.1-.9s0-.6-.1-.9l2.1-1.7c.2-.2.2-.4.1-.6l-2-3.5c-.1-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1.1-.7-1.7-1l-.4-2.6c0-.2-.2-.4-.5-.4h-4c-.3 0-.5.2-.5.4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.5-1c-.2-.1-.5 0-.6.2l-2 3.5c-.1.2-.1.4.1.6l2.1 1.7c0 .3-.1.6-.1.9s0 .6.1.9l-2.1 1.7c-.2.2-.2.4-.1.6l2 3.5c.1.2.4.3.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.6c0 .2.2.4.5.4h4c.3 0 .5-.2.5-.4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1c.2.1.5 0 .6-.2l2-3.5c.1-.2.1-.4-.1-.6l-2.1-1.7zm-7.4 2.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></g>
@@ -525,84 +472,29 @@
 
             <div class="info-card">
                 <div class="info-title">✨ Klinika Ma'lumotlari</div>
-                <div class="info-row"><span class="info-label">Ish vaqti:</span><span class="info-value" id="workTimeDisplay">7:00 - 19:00</span></div>
-                <div class="info-row"><span class="info-label">Aloqa telefoni:</span><span class="info-value" id="clinicPhoneDisplay">+998919677750</span></div>
+                <div class="info-row"><span class="info-label">Ish vaqti:</span><span class="info-value" id="workTimeDisplay">-</span></div>
+                <div class="info-row"><span class="info-label">Aloqa telefoni:</span><span class="info-value" id="clinicPhoneDisplay">-</span></div>
             </div>
 
             <div class="action-button-group">
-                <a id="phoneLink" href="tel:+998919677750" class="act-btn" style="background:#e8f5e9; color:#34c759;">📞 Telefon Qilish</a>
+                <a id="phoneLink" href="#" class="act-btn" style="background:#e8f5e9; color:#34c759;">📞 Telefon Qilish</a>
                 <a id="locationLink" href="#" target="_blank" class="act-btn" style="background:#e1f5fe; color:#0288d1;">📍 Georadar (Xarita)</a>
             </div>
         </div>
 
-        <!-- 5. ADMIN PANEL -->
+        <!-- 5. ADMIN PANEL (FAQAT NAVBATLARNI KO'RISH UCHUN) -->
         <div id="adminPanel" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Chiqish</button>
             
-            <div class="tab-bar">
-                <button class="tab-item active" onclick="switchTab('tabOrders')">Kelgan Navbatlar</button>
-                <button class="tab-item" onclick="switchTab('tabSettings')">Tahrirlash Paneli</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h4 style="font-weight:700;">Kelgan Navbatlar Ro'yxati</h4>
+                <button onclick="clearOrders()" style="color:#ff3b30; background:none; border:none; font-weight:600; font-size:14px;">Barchasini o'chirish</button>
             </div>
-
-            <!-- TAB 1: NAVBATLAR -->
-            <div id="tabOrders" class="tab-pane active">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <h4 style="font-weight:700;">Mijozlar Ro'yxati</h4>
-                    <button onclick="clearOrders()" style="color:#ff3b30; background:none; border:none; font-weight:600; font-size:14px;">Barchasini o'chirish</button>
-                </div>
-                <div id="ordersList"></div>
-            </div>
-
-            <!-- TAB 2: SOZLAMALAR -->
-            <div id="tabSettings" class="tab-pane">
-                <h4 style="font-weight:700; margin-bottom:12px; color:var(--apple-blue);">Klinika Matnlari</h4>
-                
-                <div class="form-group">
-                    <label>Logo matni</label>
-                    <input type="text" id="siteTitleInput" class="apple-input">
-                </div>
-                <div class="form-group">
-                    <label>Asosiy katta sarlavha</label>
-                    <input type="text" id="mainHeadingInput" class="apple-input">
-                </div>
-                <div class="form-group">
-                    <label>Klinika qisqa ta'rifi</label>
-                    <input type="text" id="mainDescInput" class="apple-input">
-                </div>
-                <div class="form-group">
-                    <label>Klinika Bio qismi</label>
-                    <textarea id="bioInput" class="apple-input" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Ish vaqti</label>
-                    <input type="text" id="workTimeInput" class="apple-input">
-                </div>
-                <div class="form-group">
-                    <label>Klinika telefoni</label>
-                    <input type="text" id="clinicPhoneInput" class="apple-input">
-                </div>
-                <div class="form-group">
-                    <label>Google Map Lokatsiya Linki</label>
-                    <input type="text" id="locationInput" class="apple-input">
-                </div>
-
-                <h4 style="font-weight:700; margin:24px 0 10px; color:var(--apple-blue);">👨‍⚕️ Shifokorlar (Ismi = Mutaxassisligi)</h4>
-                <div class="form-group">
-                    <textarea id="doctorsTextInput" class="apple-input" rows="4" placeholder="Dr. Shoxjahon = Bosh Shifokor"></textarea>
-                </div>
-
-                <h4 style="font-weight:700; margin:24px 0 10px; color:var(--apple-blue);">🦷 Xizmatlar va Narxlar (Xizmat = Narx)</h4>
-                <div class="form-group">
-                    <textarea id="servicesTextInput" class="apple-input" rows="5" placeholder="Tish plombasi = 150 000 so'm"></textarea>
-                </div>
-
-                <button class="submit-btn" onclick="saveSettings()" style="background:#34c759; box-shadow:none; margin-top:10px;">O'zgarishlarni Saqlash</button>
-            </div>
+            <div id="ordersList"></div>
         </div>
 
     </div>
 
-    <!-- Pastki Menu Paneli -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchPage('home')">
             <svg class="icon"><use href="#icon-home"/></svg><span>Asosiy</span>
@@ -619,12 +511,14 @@
     </div>
 
     <script>
-        // TELEGRAM SOZLAMALARI
+        // ========================================================
+        // 🛠️ KLINIKA SOZLAMALARI (SHU YERDAN O'ZGARTIRING!)
+        // ========================================================
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
         const CHAT_ID = '7017291129'; 
         const ADMIN_PASSWORD = '123';
 
-        const defaultSettings = {
+        const globalSettings = {
             siteTitle: "Dr. Shoxjahon",
             mainHeading: "Mukammal Tabassum",
             mainDesc: "Premium darajadagi zamonaviy, og'riqsiz stomatologiya xizmati.",
@@ -632,30 +526,33 @@
             workTime: "7:00 - 19:00",
             clinicPhone: "+998919677750",
             locationUrl: "https://maps.google.com",
+            
+            // Shifokorlar ro'yxati (Ismi = Mutaxassisligi ko'rinishida yozing)
             doctorsText: "Dr. Shoxjahon Latifova = Bosh Shifokor / Ortodont\nDr. Azizov Bexruz = Xirurg / Implantolog",
+            
+            // Xizmatlar va narxlar (Xizmat nomi = Narxi ko'rinishida yozing)
             servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
         };
+        // ========================================================
 
-        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v3')) || defaultSettings;
         let orders = JSON.parse(localStorage.getItem('dental_data_v3')) || [];
 
         function updateDOM() {
-            document.getElementById('siteTitleDisplay').innerText = currentSettings.siteTitle;
-            document.getElementById('mainHeadingDisplay').innerText = currentSettings.mainHeading;
-            document.getElementById('mainDescDisplay').innerText = currentSettings.mainDesc;
-            document.getElementById('bioDisplay').innerText = currentSettings.bio;
-            document.getElementById('workTimeDisplay').innerText = currentSettings.workTime;
-            document.getElementById('clinicPhoneDisplay').innerText = currentSettings.clinicPhone;
-            document.getElementById('phoneLink').href = "tel:" + currentSettings.clinicPhone;
-            document.getElementById('locationLink').href = currentSettings.locationUrl;
+            document.getElementById('siteTitleDisplay').innerText = globalSettings.siteTitle;
+            document.getElementById('mainHeadingDisplay').innerText = globalSettings.mainHeading;
+            document.getElementById('mainDescDisplay').innerText = globalSettings.mainDesc;
+            document.getElementById('bioDisplay').innerText = globalSettings.bio;
+            document.getElementById('workTimeDisplay').innerText = globalSettings.workTime;
+            document.getElementById('clinicPhoneDisplay').innerText = globalSettings.clinicPhone;
+            document.getElementById('phoneLink').href = "tel:" + globalSettings.clinicPhone;
+            document.getElementById('locationLink').href = globalSettings.locationUrl;
 
-            // Xizmatlar ro'yxati
             const listDisplay = document.getElementById('servicesListDisplay');
             const selectElement = document.getElementById('serviceTypeSelect');
             listDisplay.innerHTML = '';
             selectElement.innerHTML = '';
 
-            currentSettings.servicesText.split('\n').forEach(line => {
+            globalSettings.servicesText.split('\n').forEach(line => {
                 if(line.includes('=')) {
                     const [name, price] = line.split('=');
                     listDisplay.innerHTML += `<div class="info-row"><span class="info-label">${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
@@ -663,10 +560,9 @@
                 }
             });
 
-            // Shifokorlar
             const docsDisplay = document.getElementById('doctorsListDisplay');
             docsDisplay.innerHTML = '';
-            currentSettings.doctorsText.split('\n').forEach(line => {
+            globalSettings.doctorsText.split('\n').forEach(line => {
                 if(line.includes('=')) {
                     const [docName, docSpec] = line.split('=');
                     docsDisplay.innerHTML += `
@@ -681,35 +577,6 @@
             });
         }
 
-        function loadSettingsToInputs() {
-            document.getElementById('siteTitleInput').value = currentSettings.siteTitle;
-            document.getElementById('mainHeadingInput').value = currentSettings.mainHeading;
-            document.getElementById('mainDescInput').value = currentSettings.mainDesc;
-            document.getElementById('bioInput').value = currentSettings.bio;
-            document.getElementById('workTimeInput').value = currentSettings.workTime;
-            document.getElementById('clinicPhoneInput').value = currentSettings.clinicPhone;
-            document.getElementById('locationInput').value = currentSettings.locationUrl;
-            document.getElementById('doctorsTextInput').value = currentSettings.doctorsText;
-            document.getElementById('servicesTextInput').value = currentSettings.servicesText;
-        }
-
-        function saveSettings() {
-            currentSettings.siteTitle = document.getElementById('siteTitleInput').value;
-            currentSettings.mainHeading = document.getElementById('mainHeadingInput').value;
-            currentSettings.mainDesc = document.getElementById('mainDescInput').value;
-            currentSettings.bio = document.getElementById('bioInput').value;
-            currentSettings.workTime = document.getElementById('workTimeInput').value;
-            currentSettings.clinicPhone = document.getElementById('clinicPhoneInput').value;
-            currentSettings.locationUrl = document.getElementById('locationInput').value;
-            currentSettings.doctorsText = document.getElementById('doctorsTextInput').value;
-            currentSettings.servicesText = document.getElementById('servicesTextInput').value;
-
-            localStorage.setItem('dental_config_v3', JSON.stringify(currentSettings));
-            updateDOM();
-            alert("✅ O'zgarishlar muvaffaqiyatli saqlandi!");
-            switchPage('home');
-        }
-
         function switchPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
@@ -722,14 +589,6 @@
             window.scrollTo(0,0);
         }
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-pane').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Telefon formatlagich
         document.getElementById('userPhone').addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
             if (!x[1]) { e.target.value = '+998 '; return; }
@@ -742,7 +601,6 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // 2 kishi bitta vaqtni tanlay olmasligi uchun cheklov
             const isTimeBusy = orders.some(order => order.date === date && order.time === time);
             if (isTimeBusy) {
                 alert(`⚠️ Kechirasiz, soat ${time} dagi vaqt allaqachon band! Iltimos, boshqa vaqtni belgilang.`);
@@ -762,14 +620,21 @@
             orders.push(newOrder);
             localStorage.setItem('dental_data_v3', JSON.stringify(orders));
 
-            const xabar = `🔔 **YANGI NAVBAT!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🪪 **Pasport:** ${passport}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date} | ⏰ **Vaqt:** ${time}`;
+            const xabar = `<b>🔔 YANGI NAVBAT!</b>\n\n` +
+                          `👤 <b>Bemor:</b> ${name}\n` +
+                          `📞 <b>Tel:</b> ${phone}\n` +
+                          `📍 <b>Manzil:</b> ${address}\n` +
+                          `🪪 <b>Pasport:</b> ${passport}\n` +
+                          `🦷 <b>Xizmat:</b> ${service}\n` +
+                          `📅 <b>Sana:</b> ${date} | ⏰ <b>Vaqt:</b> ${time}`;
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
+                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "HTML" })
             })
-            .then(() => {
+            .then(res => {
+                if(!res.ok) throw new Error('Telegram error');
                 alert('✅ Navbatingiz muvaffaqiyatli band qilindi!');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
@@ -777,7 +642,9 @@
                 switchPage('home');
             })
             .catch(() => {
-                alert('Tizim muvaffaqiyatli ishladi!');
+                alert('✅ Navbat qabul qilindi.');
+                document.getElementById('appointmentForm').reset();
+                document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             });
@@ -787,7 +654,6 @@
             const pass = prompt('Admin parolini kiriting:');
             if (pass === ADMIN_PASSWORD) {
                 renderOrders();
-                loadSettingsToInputs();
                 switchPage('adminPanel');
             } else if (pass !== null) {
                 alert('Parol noto\'g\'ri!');
