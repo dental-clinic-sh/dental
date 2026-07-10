@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Clinic - Stomatologiya</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; color: #333; background: #f4f7f6; }
+        header { background: white; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo { font-size: 24px; font-weight: bold; color: #0070f3; }
+        .hero { background: linear-gradient(135deg, #e0eafc, #cfdef3); padding: 35px 20px; text-align: center; }
+        .container { padding: 15px; max-width: 450px; margin: 0 auto; box-sizing: border-box; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h3 { margin-top: 0; color: #0070f3; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
+        input, select, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; outline: none; }
+        button { background: #0070f3; color: white; font-weight: bold; border: none; cursor: pointer; transition: 0.2s; }
+        button:active { background: #0056b3; }
+        .info-text { font-size: 15px; color: #555; line-height: 1.6; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+    <!-- SAYT TEPA QISMI -->
+    <header>
+        <div class="logo">🦷 Dental Clinic</div>
+        <div style="font-size: 14px; margin-top: 5px; color: #666;">🕒 Ish vaqti: 7:00 - 19:00 | 📞 +998919677750</div>
+    </header>
+
+    <!-- BANNER -->
+    <div class="hero">
+        <h2 style="margin: 0 0 10px 0; font-size: 24px;">Professional Stomatologiya</h2>
+        <p style="margin: 0; color: #555;">Dr. Shoxjahon Latifova — Chet elda o'qib kelgan yuqori malakali mutaxassis.</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- XIZMATLAR RO'YXATI -->
+        <div class="card">
+            <h3>Bizning Xizmatlar:</h3>
+            <p class="info-text"><b>• Stomatologiya</b> (Umumiy ko'rik)</p>
+            <p class="info-text"><b>• Xirurg-implantologiya</b> (Implant o'rnatish)</p>
+            <p class="info-text"><b>• Terapevt-endodontist</b> (Tish davolash)</p>
+            <p class="info-text"><b>• Ortoped</b> (Protez va qoplamalar)</p>
+            <p class="info-text"><b>• Bolalar stomatologi</b></p>
+            <p class="info-text"><b>• Ortodontiya:</b> Breketlar</p>
+        </div>
+
+        <!-- ONLINE NAVBAT FORMASI (ADMIN PANELSIZ - TO'G'RI TELEGRAMGA BORADI) -->
+        <div class="card">
+            <h3>📅 Onlayn Navbatga Yozilish</h3>
+            <form id="navbatForm">
+                <input type="text" id="ism" placeholder="Ismingiz va Familiyangiz" required>
+                <input type="tel" id="telefon" placeholder="Telefon raqamingiz" value="+998" required>
+                
+                <select id="xizmat">
+                    <option>Stomatologiya (Ko'rik)</option>
+                    <option>Xirurg-implantologiya</option>
+                    <option>Terapevt-endodontist</option>
+                    <option>Ortoped xizmati</option>
+                    <option>Bolalar stomatologi</option>
+                    <option>Ortodontiya (Breketlar)</option>
+                </select>
+                
+                <div style="display: flex; gap: 10px;">
+                    <input type="date" id="sana" required>
+                    <input type="time" id="vaqt" required>
+                </div>
+                
+                <button type="submit" id="btn">Navbatga yozilish</button>
+            </form>
+            <p id="status" style="text-align:center; font-weight:bold; color: #28a745; margin-top: 10px;"></p>
+        </div>
+        
+        <!-- MANZIL VA IJTIMOIY TARMOQ -->
+        <div class="card">
+            <h3>📍 Klinika Manzili</h3>
+            <p class="info-text">Klinikamiz joylashuvini Google Maps orqali oson toping:</p>
+            <p style="margin: 15px 0;"><a href="https://maps.app.goo.gl/GcaaysddkJcDiYFE9?g_st=ac" target="_blank" style="background: #e2e8f0; color: #0070f3; padding: 10px 15px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">🗺️ Google Maps xaritada ko'rish</a></p>
+            <p class="info-text">Instagram sahifamiz: <a href="https://instagram.com/dr_sh_dental_clinic" target="_blank" style="color: #0070f3; font-weight: bold; text-decoration: none;">@dr_sh_dental_clinic</a></p>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT: MA'LUMOTLARNI TELEGRAM BOTGA YUBORISH -->
+    <script>
+        // TELEGRAM SOZLAMALARI (O'zingizning bot token va Chat ID'ingizni qo'yasiz)
+        const BOT_TOKEN = "7353952402:AAFrxxxxxxxxxxxxxxxxxxxx"; // O'zingizni bot tokeningiz
+        const CHAT_ID = "123456789"; // Shifokorning telegram ID raqami
+
+        document.getElementById('navbatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            document.getElementById('btn').innerText = "Yuborilmoqda...";
+            
+            const ism = document.getElementById('ism').value;
+            const telefon = document.getElementById('telefon').value;
+            const xizmat = document.getElementById('xizmat').value;
+            const sana = document.getElementById('sana').value;
+            const vaqt = document.getElementById('vaqt').value;
+
+            // Telegramga boradigan chiroyli xabar matni
+            const xabar = `🆕 **YANGI BEMOR AZOSI!**\n\n👤 **Ismi:** ${ism}\n📞 **Tel:** ${telefon}\n🦷 **Xizmat:** ${xizmat}\n📅 **Sana:** ${sana}\n🕒 **Vaqt:** ${vaqt}`;
+
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: xabar,
+                    parse_mode: "Markdown"
+                })
+            }).then(res => {
+                document.getElementById('status').innerText = "✅ Muvaffaqiyatli yozildingiz! Admin tez orada aloqaga chiqadi.";
+                document.getElementById('btn').innerText = "Navbatga yozilish";
+                document.getElementById('navbatForm').reset();
+            }).catch(err => {
+                document.getElementById('status').innerText = "❌ Xatolik yuz berdi. Qayta urining.";
+                document.getElementById('btn').innerText = "Navbatga yozilish";
+            });
+        });
+    </script>
+</body>
+</html>
