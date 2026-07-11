@@ -399,8 +399,8 @@
         const BOT_TOKEN = '8615273402:AAH1BAeAbQ18c2AW54qBr6IzyeZnQM2KfTc'; 
         const GURUX_USERNAME = 'dental_shoox';
         
-        // GLOBAL INTERNET BAZA URL (Hech qachon o'chmaydi va xavfsiz)
-        const DB_URL = 'https://kvdb.io/MN8WshbNf6R8aL1t7wZ4w6/clinic_data_v1';
+        // FIREBASE REALTIME DATABASE - ENG BARQOROR VA TEZKOR SIZNING BAZANGIZ
+        const DB_URL = 'https://dental-shox-default-rtdb.firebaseio.com/settings.json';
 
         let defaultSettings = {
             siteTitle: "Dr. Shoxjahon",
@@ -415,73 +415,79 @@
 
         let settings = defaultSettings;
 
-        // GLOBAL BAZADAN MA'LUMOTLARNI YUKLASH (HAMMA TELEFONDA KO'RINADI)
+        // BAZADAN ONLINE YUKLASH TIZIMI
         function loadSettings() {
             fetch(DB_URL)
-                .then(res => {
-                    if(!res.ok) throw new Error();
-                    return res.json();
-                })
+                .then(res => res.json())
                 .then(data => {
-                    settings = data;
+                    if(data) {
+                        settings = data;
+                    } else {
+                        settings = defaultSettings;
+                    }
                     updateDOM();
                 })
                 .catch(() => {
+                    // Agar internetda muammo bo'lsa zaxira ma'lumotlarni ochadi (sayt sinib qolmaydi)
                     settings = defaultSettings;
                     updateDOM();
                 });
         }
 
         function updateDOM() {
-            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle;
-            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading;
-            document.getElementById('mainDescDisplay').innerText = settings.mainDesc;
-            document.getElementById('bioDisplay').innerText = settings.bio;
-            document.getElementById('workTimeDisplay').innerText = settings.workTime;
-            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone;
+            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle || "Dr. Shoxjahon";
+            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading || "";
+            document.getElementById('mainDescDisplay').innerText = settings.mainDesc || "";
+            document.getElementById('bioDisplay').innerText = settings.bio || "";
+            document.getElementById('workTimeDisplay').innerText = settings.workTime || "";
+            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone || "";
 
             const listDisplay = document.getElementById('servicesListDisplay');
             const selectElement = document.getElementById('serviceTypeSelect');
             listDisplay.innerHTML = ''; selectElement.innerHTML = '';
 
-            settings.servicesText.split('\n').forEach(line => {
-                if(line.includes('=')) {
-                    const [name, price] = line.split('=');
-                    listDisplay.innerHTML += `<div class="info-row"><span class="info-label">🦷 ${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
-                    selectElement.innerHTML += `<option>${name.trim()}</option>`;
-                }
-            });
+            if(settings.servicesText) {
+                settings.servicesText.split('\n').forEach(line => {
+                    if(line.includes('=')) {
+                        const [name, price] = line.split('=');
+                        listDisplay.innerHTML += `<div class="info-row"><span class="info-label">🦷 ${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
+                        selectElement.innerHTML += `<option>${name.trim()}</option>`;
+                    }
+                });
+            }
 
             const docsDisplay = document.getElementById('doctorsListDisplay');
             docsDisplay.innerHTML = '';
-            settings.doctorsText.split('\n').forEach(line => {
-                if(line.includes('=')) {
-                    const [docName, docSpec] = line.split('=');
-                    docsDisplay.innerHTML += `<div class="doctor-card-item"><div class="doc-avatar">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
-                }
-            });
+            if(settings.doctorsText) {
+                settings.doctorsText.split('\n').forEach(line => {
+                    if(line.includes('=')) {
+                        const [docName, docSpec] = line.split('=');
+                        docsDisplay.innerHTML += `<div class="doctor-card-item"><div class="doc-avatar">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
+                    }
+                });
+            }
         }
 
         function checkAdmin() {
             if (prompt('Admin parolini kiriting:') === '123') {
-                document.getElementById('editSiteTitle').value = settings.siteTitle;
-                document.getElementById('editMainHeading').value = settings.mainHeading;
-                document.getElementById('editMainDesc').value = settings.mainDesc;
-                document.getElementById('editBio').value = settings.bio;
-                document.getElementById('editWorkTime').value = settings.workTime;
-                document.getElementById('editClinicPhone').value = settings.clinicPhone;
-                document.getElementById('editDoctors').value = settings.doctorsText;
-                document.getElementById('editServices').value = settings.servicesText;
+                document.getElementById('editSiteTitle').value = settings.siteTitle || "";
+                document.getElementById('editMainHeading').value = settings.mainHeading || "";
+                document.getElementById('editMainDesc').value = settings.mainDesc || "";
+                document.getElementById('editBio').value = settings.bio || "";
+                document.getElementById('editWorkTime').value = settings.workTime || "";
+                document.getElementById('editClinicPhone').value = settings.clinicPhone || "";
+                document.getElementById('editDoctors').value = settings.doctorsText || "";
+                document.getElementById('editServices').value = settings.servicesText || "";
                 switchPage('adminPanel');
             } else { alert('Parol noto\'g\'ri!'); }
         }
 
         function saveAdminSettings() {
             const btn = document.getElementById('saveBtn');
-            btn.innerText = "Internet bazaga saqlanmoqda...";
+            btn.innerText = "Firebase bazaga saqlanmoqda...";
             btn.disabled = true;
 
-            settings = {
+            const updatedSettings = {
                 siteTitle: document.getElementById('editSiteTitle').value,
                 mainHeading: document.getElementById('editMainHeading').value,
                 mainDesc: document.getElementById('editMainDesc').value,
@@ -492,21 +498,26 @@
                 servicesText: document.getElementById('editServices').value
             };
 
-            // INTERNET BAZAGA YUBORISH (HAMMA UCHUN JONLI YANGILANADI)
+            // PUT METODI BILAN GOOGLE FIREBASEGA SAQLASH
             fetch(DB_URL, {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(settings)
+                body: JSON.stringify(updatedSettings)
             })
-            .then(() => {
-                alert("✅ O'zgarishlar saqlandi! Saytga kirgan barcha mijozlarda yangi narxlar ko'rinadi.");
+            .then(res => {
+                if(!res.ok) throw new Error();
+                return res.json();
+            })
+            .then(data => {
+                alert("✅ Muammosiz saqlandi! Endi barcha mijozlar smartfonida yangi narxlar zaxoti ko'rinadi.");
+                settings = data;
                 btn.innerText = "O'zgarishlarni Saqlash";
                 btn.disabled = false;
                 updateDOM();
                 switchPage('home');
             })
             .catch(() => {
-                alert("Tarmoq xatoligi. Qayta urinib ko'ring.");
+                alert("Ulanishda xatolik. Internetni tekshirib qayta urining.");
                 btn.innerText = "O'zgarishlarni Saqlash";
                 btn.disabled = false;
             });
