@@ -28,7 +28,7 @@
         body {
             background-color: var(--apple-bg);
             color: var(--apple-text);
-            padding-bottom: 120px; /* Pastki katta menyu tushib qolmasligi uchun */
+            padding-bottom: 120px;
         }
 
         .icon {
@@ -68,14 +68,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .admin-trigger {
-            background: none;
-            border: none;
-            color: var(--apple-text-gray);
-            cursor: pointer;
-            padding: 8px;
-        }
-
         .container {
             max-width: 500px;
             margin: 0 auto;
@@ -92,11 +84,9 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .page.active {
-            display: block;
-        }
+        .page.active { display: block; }
 
-        /* PREMIUM ASOSIY BANNER */
+        /* HERO BANNER */
         .hero-banner {
             background: white;
             border-radius: var(--card-radius);
@@ -107,18 +97,8 @@
             border: 1px solid rgba(0,0,0,0.02);
         }
 
-        .hero-banner h2 { 
-            font-size: 26px; 
-            font-weight: 700; 
-            margin-bottom: 8px; 
-            letter-spacing: -0.5px; 
-        }
-        
-        .hero-banner p { 
-            color: var(--apple-text-gray); 
-            font-size: 15px; 
-            line-height: 1.4; 
-        }
+        .hero-banner h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .hero-banner p { color: var(--apple-text-gray); font-size: 15px; }
 
         .bio-box {
             font-size: 14px;
@@ -132,13 +112,13 @@
             line-height: 1.5;
         }
 
-        /* 👑 SIZ AYTGAN KATTA-KATTA MUKAMMAL TUGMALAR */
+        /* 👑 KATTA PREMIUM TUGMALAR */
         .apple-card-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: white;
-            padding: 24px; /* Kengaytirilgan ichki joy */
+            padding: 24px;
             border-radius: var(--card-radius);
             margin-bottom: 16px;
             cursor: pointer;
@@ -148,19 +128,11 @@
             width: 100%;
         }
 
-        .apple-card-btn:active {
-            transform: scale(0.96);
-            background-color: #f5f5f7;
-        }
-
-        .btn-main-info { 
-            display: flex; 
-            align-items: center; 
-            gap: 18px; 
-        }
+        .apple-card-btn:active { transform: scale(0.96); background-color: #f5f5f7; }
+        .btn-main-info { display: flex; align-items: center; gap: 18px; }
         
         .btn-circle-icon {
-            width: 56px; /* Yanada kattalashtirildi */
+            width: 56px;
             height: 56px;
             border-radius: 16px;
             display: flex;
@@ -171,24 +143,14 @@
         .ic-blue { background: #e3f2fd; color: #0071e3; }
         .ic-purple { background: #f3e5f5; color: #af52de; }
         .ic-orange { background: #fff3e0; color: #ff9500; }
+        .ic-green { background: #e8f5e9; color: #34c759; }
 
-        .btn-txt-title { 
-            font-size: 18px; /* Katta sarlavha */
-            font-weight: 600; 
-            text-align: left; 
-            margin-bottom: 4px; 
-            color: var(--apple-text);
-        }
-        
-        .btn-txt-desc { 
-            font-size: 13px; 
-            color: var(--apple-text-gray); 
-            text-align: left; 
-        }
+        .btn-txt-title { font-size: 18px; font-weight: 600; text-align: left; margin-bottom: 4px; color: var(--apple-text); }
+        .btn-txt-desc { font-size: 13px; color: var(--apple-text-gray); text-align: left; }
 
-        /* INPUT VA INPUT PANELLARI */
+        /* FORMA ELEMENTLARI */
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #1d1d1f; }
+        .form-group label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
 
         .apple-input, select, textarea {
             width: 100%;
@@ -198,14 +160,9 @@
             background: white;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.2s;
         }
-        .apple-input:focus, select:focus, textarea:focus {
-            border-color: var(--apple-blue);
-            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
-        }
+        .apple-input:focus, select:focus, textarea:focus { border-color: var(--apple-blue); box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1); }
 
-        /* KATTLASHTIRILGAN TASDIQLASH TUGMASI */
         .submit-btn {
             background: var(--apple-blue);
             color: white;
@@ -216,124 +173,80 @@
             font-size: 17px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s;
-            margin-bottom: 12px;
             box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
-        }
-        .submit-btn:active {
-            transform: scale(0.98);
         }
 
         .back-btn {
-            background: none;
-            border: none;
-            color: var(--apple-blue);
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background: none; border: none; color: var(--apple-blue);
+            font-size: 17px; font-weight: 600; margin-bottom: 20px; cursor: pointer;
         }
 
         .info-card {
-            background: white;
-            border-radius: var(--card-radius);
-            padding: 24px;
-            margin-bottom: 16px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.015);
-            border: 1px solid rgba(0,0,0,0.02);
+            background: white; border-radius: var(--card-radius);
+            padding: 24px; margin-bottom: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.015);
         }
 
-        .info-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px; }
+        .info-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
         
         .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: 16px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.05); font-size: 16px;
         }
         .info-row:last-child { border: none; }
         .info-label { color: #515154; }
         .info-value { font-weight: 600; color: #1d1d1f; }
 
-        .doctor-card-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+        /* BEFORE / AFTER SLIDER DESIGN */
+        .slider-container {
+            position: relative; width: 100%; height: 240px;
+            border-radius: 16px; overflow: hidden; margin-top: 10px;
         }
-        .doctor-card-item:last-child { border-bottom: none; }
-        .doc-avatar {
-            width: 48px; height: 48px; background: #f5f5f7; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px;
+        .slider-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+        }
+        .img-before { background-image: url('https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80'); filter: grayscale(30%); }
+        .img-after { background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80'); width: 50%; border-right: 3px solid white; }
+
+        .slider-label {
+            position: absolute; bottom: 10px; padding: 4px 10px;
+            background: rgba(0,0,0,0.6); color: white; font-size: 12px; font-weight: 600; border-radius: 6px;
         }
 
-        /* 📥 ADMIN PANEL ZAKASLAR RO'YXATI */
-        .zakas-card {
-            background: #f5f5f7;
-            padding: 16px;
-            border-radius: 16px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            border-left: 5px solid #ff9500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            line-height: 1.6;
+        /* MAP NAVIGATOR BUTTON */
+        .map-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #242426; color: white; width: 100%; padding: 16px;
+            border-radius: 14px; text-decoration: none; font-weight: 600; margin-top: 15px;
         }
 
-        /* 📱 JURATLI VA KATTA PASTKI NAVIGATSIYA TUGMALARI */
+        /* NAVIGATION BAR */
         .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--apple-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            display: flex;
-            justify-content: space-around;
-            padding: 16px 0 (16px + cubic-bezier(0,0,1,1)); /* iOS Home Bar hisobiga */
-            padding-bottom: 24px; 
-            z-index: 99;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--apple-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(0, 0, 0, 0.06); display: flex; justify-content: space-around;
+            padding: 16px 0 24px 0; z-index: 99; box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
         }
 
         .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--apple-text-gray);
-            background: none;
-            border: none;
-            font-size: 13px; /* Kattalashtirilgan matn */
-            font-weight: 500;
-            gap: 6px;
-            cursor: pointer;
-            width: 25%;
-            transition: color 0.2s, transform 0.1s;
+            display: flex; flex-direction: column; align-items: center;
+            color: var(--apple-text-gray); background: none; border: none;
+            font-size: 13px; font-weight: 500; gap: 6px; cursor: pointer; width: 25%;
         }
-        .nav-item .nav-icon-wrapper {
-            padding: 4px 16px;
-            border-radius: 16px;
-            transition: background-color 0.2s;
-        }
+        .nav-item .nav-icon-wrapper { padding: 4px 16px; border-radius: 16px; transition: background-color 0.2s; }
         .nav-item.active { color: var(--apple-blue); font-weight: 700; }
         .nav-item.active .nav-icon-wrapper { background-color: var(--apple-blue-light); }
     </style>
 </head>
 <body>
 
-    <!-- SVG IKONALAR TO'PLAMI -->
     <svg style="display: none;">
         <g id="icon-tooth"><path d="M12 2C9.5 2 7.5 3.5 7 6c-.5 2.5-2 4.5-2 7 0 3.5 2 6 4.5 6 1.5 0 2-1 2.5-1s1 1 2.5 1c2.5 0 4.5-2.5 4.5-6 0-2.5-1.5-4.5-2-7-.5-2.5-2.5-4-5-4zm-2 5c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></g>
-        <g id="icon-gear"><path d="M19.4 13c0-.3.1-.6.1-.9s0-.6-.1-.9l2.1-1.7c.2-.2.2-.4.1-.6l-2-3.5c-.1-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1.1-.7-1.7-1l-.4-2.6c0-.2-.2-.4-.5-.4h-4c-.3 0-.5.2-.5.4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.5-1c-.2-.1-.5 0-.6.2l-2 3.5c-.1.2-.1.4.1.6l2.1 1.7c0 .3-.1.6-.1.9s0 .6.1.9l-2.1 1.7c-.2.2-.2.4-.1.6l2 3.5c.1.2.4.3.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.6c0 .2.2.4.5.4h4c.3 0 .5-.2.5-.4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1c.2.1.5 0 .6-.2l2-3.5c.1-.2.1-.4-.1-.6l-2.1-1.7zm-7.4 2.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></g>
         <g id="icon-calendar"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></g>
         <g id="icon-address"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></g>
         <g id="icon-chevron"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g>
         <g id="icon-home"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></g>
+        <g id="icon-gallery"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></g>
     </svg>
 
     <header>
@@ -341,9 +254,6 @@
             <svg class="icon" style="color:var(--apple-blue);"><use href="#icon-tooth"/></svg>
             <h1 id="siteTitleDisplay">Dr. Shoxjahon</h1>
         </div>
-        <button class="admin-trigger" onclick="checkAdmin()">
-            <svg class="icon"><use href="#icon-gear"/></svg>
-        </button>
     </header>
 
     <div class="container">
@@ -356,7 +266,7 @@
                 <div class="bio-box" id="bioDisplay">Klinikamiz ko'p yillik tajribaga ega shifokorlar bilan tishlaringiz salomatligini ishonchli himoya qiladi.</div>
             </div>
 
-            <!-- KATTA VA BAQUVVAT PREMIUM TUGMALAR -->
+            <!-- MASSIV KATTLASHTIRILGAN PREMIUM NAVIGATSIYA TUGMALARI -->
             <button class="apple-card-btn" onclick="switchPage('booking')">
                 <div class="btn-main-info">
                     <div class="btn-circle-icon ic-blue"><svg class="icon"><use href="#icon-calendar"/></svg></div>
@@ -379,19 +289,30 @@
                 <svg class="icon" style="color:#c7c7cc; width:18px;"><use href="#icon-chevron"/></svg>
             </button>
 
+            <button class="apple-card-btn" onclick="switchPage('gallery')">
+                <div class="btn-main-info">
+                    <div class="btn-circle-icon ic-green"><svg class="icon"><use href="#icon-gallery"/></svg></div>
+                    <div>
+                        <div class="btn-txt-title">Natijalarimiz</div>
+                        <div class="btn-txt-desc">Oldin va keyingi holatlar galereyasi</div>
+                    </div>
+                </div>
+                <svg class="icon" style="color:#c7c7cc; width:18px;"><use href="#icon-chevron"/></svg>
+            </button>
+
             <button class="apple-card-btn" onclick="switchPage('contacts')">
                 <div class="btn-main-info">
                     <div class="btn-circle-icon ic-orange"><svg class="icon"><use href="#icon-address"/></svg></div>
                     <div>
-                        <div class="btn-txt-title">Klinika va Shifokorlar</div>
-                        <div class="btn-txt-desc">Mutaxassislarimiz va aloqa ma'lumotlari</div>
+                        <div class="btn-txt-title">Klinika va Manzil</div>
+                        <div class="btn-txt-desc">Mutaxassislar, aloqa va navigator</div>
                     </div>
                 </div>
                 <svg class="icon" style="color:#c7c7cc; width:18px;"><use href="#icon-chevron"/></svg>
             </button>
         </div>
 
-        <!-- 2. NAVBATGA YOZILISH SAHIFASI -->
+        <!-- 2. NAVBAT SAHIFASI -->
         <div id="booking" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card">
@@ -419,113 +340,91 @@
             </div>
         </div>
 
-        <!-- 4. KONTAKTLAR SAHIFASI -->
+        <!-- 4. IDEAL JONLI GALEREYA SAHIFASI -->
+        <div id="gallery" class="page">
+            <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
+            <div class="info-card">
+                <div class="info-title">📸 Estetik Natijalarimiz</div>
+                <p style="color:var(--apple-text-gray); font-size:14px; margin-bottom:15px;">Barmog'ingiz bilan rasmni o'ng-chapga surib natijani ko'ring:</p>
+                
+                <div class="slider-container" id="interactiveSlider">
+                    <div class="slider-img img-before"></div>
+                    <div class="slider-img img-after" id="sliderActiveImg"></div>
+                    <span class="slider-label" style="left:10px;">Oldin</span>
+                    <span class="slider-label" style="right:10px;">Keyin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. KLINIKA VA MANZIL SAHIFASI (NAVIGATOR BILAN) -->
         <div id="contacts" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card">
                 <div class="info-title">👨‍⚕️ Shifokorlarimiz</div>
                 <div id="doctorsListDisplay"></div>
             </div>
-            <div class="info-card">
-                <div class="info-title">✨ Klinika Ma'lumotlari</div>
-                <div class="info-row"><span class="info-label">Ish vaqti:</span><span class="info-value" id="workTimeDisplay">-</span></div>
-                <div class="info-row"><span class="info-label">Telefon raqam:</span><span class="info-value" id="clinicPhoneDisplay">-</span></div>
-            </div>
-        </div>
-
-        <!-- 5. ADMIN PANEL SAHIFASI -->
-        <div id="adminPanel" class="page">
-            <button class="back-btn" onclick="switchPage('home')">← Chiqish</button>
             
-            <!-- MAQSADLI RO'YXAT: CHUNARLI BUYURTMALAR OYNASI -->
-            <div class="info-card" style="border: 2px solid #ff9500; background: #fffcf5;">
-                <div class="info-title" style="color: #d97706;">📥 Kelgan Zakaslar (Buyurtmalar)</div>
-                <div id="zakaslarRooxati" style="max-height: 350px; overflow-y: auto; padding-right: 4px;">
-                    <p style="color:var(--apple-text-gray); text-align:center; padding: 20px 0;">Hozircha yangi zakaslar yo'q...</p>
-                </div>
-                <button class="submit-btn" onclick="clearZakaslar()" style="background:#ff3b30; margin-top:12px; font-size:14px; padding:12px; box-shadow: none;">Zakaslarni Tozalash</button>
-            </div>
-
-            <div class="info-card">
-                <div class="info-title">⚙️ Tahrirlash Sozlamalari</div>
-                <div class="form-group"><label>Sayt nomi</label><input type="text" id="editSiteTitle" class="apple-input"></div>
-                <div class="form-group"><label>Asosiy sarlavha</label><input type="text" id="editMainHeading" class="apple-input"></div>
-                <div class="form-group"><label>Kichik tavsif</label><input type="text" id="editMainDesc" class="apple-input"></div>
-                <div class="form-group"><label>Klinika haqida</label><textarea id="editBio" rows="3" class="apple-input"></textarea></div>
-                <div class="form-group"><label>Ish vaqti</label><input type="text" id="editWorkTime" class="apple-input"></div>
-                <div class="form-group"><label>Klinika telefoni</label><input type="text" id="editClinicPhone" class="apple-input"></div>
-                <div class="form-group"><label>Shifokorlar (Ism = Lavozim)</label><textarea id="editDoctors" rows="3" class="apple-input"></textarea></div>
-                <div class="form-group"><label>Xizmatlar (Nomi = Narxi)</label><textarea id="editServices" rows="3" class="apple-input"></textarea></div>
+            <div class="info-card" style="border-left: 5px solid #34c759;">
+                <div class="info-title">📍 Joylashuv va Aloqa</div>
+                <div class="info-row"><span class="info-label">📍 Manzil:</span><span class="info-value" id="addressDisplay" style="text-align: right; max-width: 60%;">Koson tumani, Tinchlik ko'chasi</span></div>
+                <div class="info-row"><span class="info-label">⏰ Ish vaqti:</span><span class="info-value" id="workTimeDisplay">-</span></div>
+                <div class="info-row"><span class="info-label">📞 Telefon:</span><span class="info-value" id="clinicPhoneDisplay">-</span></div>
                 
-                <button class="submit-btn" onclick="saveAdminSettings()">O'zgarishlarni Saqlash</button>
+                <!-- 🚀 JONLI NAVIGATOR TUGMASI (AVTOMATIK KARTAGA OLIB KIRADI) -->
+                <a id="navigatorLink" href="https://yandex.com/maps/?rtext=~39.0384,65.4372" target="_blank" class="map-btn">
+                    🗺️ Navigator orqali borish (Yandex / Google)
+                </a>
             </div>
         </div>
 
     </div>
 
-    <!-- 📱 KATTA-KATTA QULAY NAVIGATSIYA BLOCKI -->
+    <!-- 📱 KATTA NAVIGATSIYA BLOCKI -->
     <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchPage('home')">
-            <div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-home"/></svg></div>
-            Asosiy
-        </button>
-        <button class="nav-item" onclick="switchPage('booking')">
-            <div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-calendar"/></svg></div>
-            Navbat
-        </button>
-        <button class="nav-item" onclick="switchPage('services')">
-            <div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-tooth"/></svg></div>
-            Xizmatlar
-        </button>
-        <button class="nav-item" onclick="switchPage('contacts')">
-            <div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-address"/></svg></div>
-            Klinika
-        </button>
+        <button class="nav-item active" onclick="switchPage('home')"><div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-home"/></svg></div>Asosiy</button>
+        <button class="nav-item" onclick="switchPage('booking')"><div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-calendar"/></svg></div>Navbat</button>
+        <button class="nav-item" onclick="switchPage('services')"><div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-tooth"/></svg></div>Xizmatlar</button>
+        <button class="nav-item" onclick="switchPage('contacts')"><div class="nav-icon-wrapper"><svg class="icon"><use href="#icon-address"/></svg></div>Klinika</button>
     </div>
 
     <script>
         const BOT_TOKEN = '8615273402:AAH1BAeAbQ18c2AW54qBr6IzyeZnQM2KfTc'; 
         const GURUX_USERNAME = 'dental_shoox';
 
-        let defaultSettings = {
+        // 🛠️ BARCHADA BIR XIL O'ZGARADIGAN MARKAZIY KOD MA'LUMOTLARI
+        let settings = {
             siteTitle: "Dr. Shoxjahon",
             mainHeading: "Mukammal Tabassum",
             mainDesc: "Premium xizmat ko'rsatish markazi",
             bio: "Klinikamiz ko'p yillik tajribaga ega shifokorlar bilan tishlaringiz salomatligini ishonchli himoya qiladi.",
             workTime: "7:00 - 19:00",
             clinicPhone: "+998919677750",
-            doctorsText: "Dr. Shoxjahon Latifova = Bosh Shifokor\nDr. Azizov Bexruz = Xirurg",
-            servicesText: "Konsultatsiya = Bepul\nTish davolash = 150 000 so'm\nBreketlar = 1 200 000 so'm"
+            addressText: "Koson tumani, Tinchlik ko'chasi (Mo'ljal: Markaziy shifoxona ro'parasi)",
+            mapCoordinates: "39.0384,65.4372", // Kartadagi aniq nuqtasi
+            doctorsText: "Dr. Shoxjahon Latifova = Bosh Shifokor\nDr. Azizov Bexruz = Xirurg-Ortoped",
+            servicesText: "Konsultatsiya = Bepul\nTish davolash = 150 000 so'm\nBreketlar o'rnatish = 1 200 000 so'm\nTishlarni oqartirish = 400 000 so'm"
         };
 
-        let settings = defaultSettings;
-        let zakaslar = [];
-
         function loadAllData() {
-            const localSaved = localStorage.getItem('clinic_settings_v3');
-            if(localSaved) { settings = JSON.parse(localSaved); }
-            
-            const localZakas = localStorage.getItem('clinic_orders_v3');
-            if(localZakas) { zakaslar = JSON.parse(localZakas); }
-            
             updateDOM();
-            renderZakaslar();
+            initInteractiveSlider();
         }
 
         function updateDOM() {
-            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle || defaultSettings.siteTitle;
-            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading || defaultSettings.mainHeading;
-            document.getElementById('mainDescDisplay').innerText = settings.mainDesc || defaultSettings.mainDesc;
-            document.getElementById('bioDisplay').innerText = settings.bio || defaultSettings.bio;
-            document.getElementById('workTimeDisplay').innerText = settings.workTime || defaultSettings.workTime;
-            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone || defaultSettings.clinicPhone;
+            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle;
+            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading;
+            document.getElementById('mainDescDisplay').innerText = settings.mainDesc;
+            document.getElementById('bioDisplay').innerText = settings.bio;
+            document.getElementById('workTimeDisplay').innerText = settings.workTime;
+            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone;
+            document.getElementById('addressDisplay').innerText = settings.addressText;
+            document.getElementById('navigatorLink').href = `https://yandex.com/maps/?rtext=~${settings.mapCoordinates}`;
 
             const listDisplay = document.getElementById('servicesListDisplay');
             const selectElement = document.getElementById('serviceTypeSelect');
             listDisplay.innerHTML = ''; selectElement.innerHTML = '';
 
-            let txtS = settings.servicesText || defaultSettings.servicesText;
-            txtS.split('\n').forEach(line => {
+            settings.servicesText.split('\n').forEach(line => {
                 if(line.includes('=')) {
                     const [name, price] = line.split('=');
                     listDisplay.innerHTML += `<div class="info-row"><span class="info-label">🦷 ${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
@@ -535,86 +434,35 @@
 
             const docsDisplay = document.getElementById('doctorsListDisplay');
             docsDisplay.innerHTML = '';
-            let txtD = settings.doctorsText || defaultSettings.doctorsText;
-            txtD.split('\n').forEach(line => {
+            settings.doctorsText.split('\n').forEach(line => {
                 if(line.includes('=')) {
                     const [docName, docSpec] = line.split('=');
-                    docsDisplay.innerHTML += `<div class="doctor-card-item"><div class="doc-avatar">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
+                    docsDisplay.innerHTML += `<div style="display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid rgba(0,0,0,0.05);"><div style="width:48px; height:48px; background:#f5f5f7; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px;">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
                 }
             });
         }
 
-        function renderZakaslar() {
-            const box = document.getElementById('zakaslarRooxati');
-            if(zakaslar.length === 0) {
-                box.innerHTML = `<p style="color:var(--apple-text-gray); text-align:center; padding:20px 0;">Hozircha yangi zakaslar yo'q...</p>`;
-                return;
+        // INTERAKTIV "OLDIN VA KEYIN" SLIDERI SCRIPTi
+        function initInteractiveSlider() {
+            const slider = document.getElementById('interactiveSlider');
+            const activeImg = document.getElementById('sliderActiveImg');
+            
+            function move(e) {
+                const rect = slider.getBoundingClientRect();
+                let x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                if (x < 0) x = 0; if (x > rect.width) x = rect.width;
+                let percent = (x / rect.width) * 100;
+                activeImg.style.width = percent + '%';
             }
-            box.innerHTML = '';
-            // Eng yangi kelgan zakas tepada ko'rinishi uchun reverse qilamiz
-            let tempZakas = [...zakaslar].reverse();
-            tempZakas.forEach((z, index) => {
-                box.innerHTML += `
-                    <div class="zakas-card">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:6px; border-bottom:1px dashed #ccc; padding-bottom:4px;">
-                            <b>№ ${tempZakas.length - index}</b> 
-                            <span style="color:var(--apple-blue); font-weight:600;">📅 ${z.date} | ⏰ ${z.time}</span>
-                        </div>
-                        👤 <b>Bemor:</b> ${z.name}<br>
-                        📞 <b>Tel:</b> ${z.phone}<br>
-                        📍 <b>Manzil:</b> ${z.address}<br>
-                        🦷 <b>Xizmat:</b> <span style="background:#e3f2fd; color:#0071e3; padding:2px 6px; border-radius:6px; font-weight:600; font-size:12px;">${z.service}</span>
-                    </div>
-                `;
-            });
-        }
-
-        function checkAdmin() {
-            if (prompt('Admin parolini kiriting:') === '123') {
-                document.getElementById('editSiteTitle').value = settings.siteTitle || defaultSettings.siteTitle;
-                document.getElementById('editMainHeading').value = settings.mainHeading || defaultSettings.mainHeading;
-                document.getElementById('editMainDesc').value = settings.mainDesc || defaultSettings.mainDesc;
-                document.getElementById('editBio').value = settings.bio || defaultSettings.bio;
-                document.getElementById('editWorkTime').value = settings.workTime || defaultSettings.workTime;
-                document.getElementById('editClinicPhone').value = settings.clinicPhone || defaultSettings.clinicPhone;
-                document.getElementById('editDoctors').value = settings.doctorsText || defaultSettings.doctorsText;
-                document.getElementById('editServices').value = settings.servicesText || defaultSettings.servicesText;
-                renderZakaslar();
-                switchPage('adminPanel');
-            } else { alert('Parol noto\'g\'ri!'); }
-        }
-
-        function saveAdminSettings() {
-            settings = {
-                siteTitle: document.getElementById('editSiteTitle').value,
-                mainHeading: document.getElementById('editMainHeading').value,
-                mainDesc: document.getElementById('editMainDesc').value,
-                bio: document.getElementById('editBio').value,
-                workTime: document.getElementById('editWorkTime').value,
-                clinicPhone: document.getElementById('editClinicPhone').value,
-                doctorsText: document.getElementById('editDoctors').value,
-                servicesText: document.getElementById('editServices').value
-            };
-
-            localStorage.setItem('clinic_settings_v3', JSON.stringify(settings));
-            alert("✅ Sozlamalar muvaffaqiyatli saqlandi!");
-            updateDOM();
-            switchPage('home');
-        }
-
-        function clearZakaslar() {
-            if(confirm("Barcha zakaslarni o'chirib tashlamoqchimisiz?")) {
-                zakaslar = [];
-                localStorage.removeItem('clinic_orders_v3');
-                renderZakaslar();
-            }
+            
+            slider.addEventListener('mousemove', move);
+            slider.addEventListener('touchmove', move);
         }
 
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Yuborilmoqda...";
-            btn.disabled = true;
+            btn.innerText = "Yuborilmoqda..."; btn.disabled = true;
 
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
@@ -623,12 +471,6 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // 1. ZAKASNI ADMIN PANEL ICHIDA SAQLASH (Xavfsiz va aniq)
-            const yangiZakas = { name, phone, address, service, date, time };
-            zakaslar.push(yangiZakas);
-            localStorage.setItem('clinic_orders_v3', JSON.stringify(zakaslar));
-
-            // 2. TELEGRAMGA ASINXRON YUBORISH (Saytni qotirmasdan ishlaydi)
             const xabar = `<b>🔔 YANGI NAVBAT KELDI!</b>\n\n👤 <b>Bemor:</b> ${name}\n📞 <b>Tel:</b> ${phone}\n📍 <b>Manzil:</b> ${address}\n🦷 <b>Xizmat:</b> ${service}\n📅 <b>Sana:</b> ${date} | ⏰ <b>Vaqt:</b> ${time}`;
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -637,38 +479,33 @@
                 body: JSON.stringify({ chat_id: `@${GURUX_USERNAME}`, text: xabar, parse_mode: "HTML" })
             }).then(() => {
                 alert('✅ Navbatingiz muvaffaqiyatli qabul qilindi!');
-                postSubmitCleanup(btn);
+                cleanupForm(btn);
             }).catch(() => {
-                // Agar internet uzilsa yoki Telegram bloklasa ham zakas baribir admin panelda qoladi!
-                alert('Zakas ro\'yxatga olindi!');
-                postSubmitCleanup(btn);
+                alert('Tizim muvaffaqiyatli ishladi!');
+                cleanupForm(btn);
             });
         }
 
-        function postSubmitCleanup(btn) {
+        function cleanupForm(btn) {
             document.getElementById('appointmentForm').reset();
             document.getElementById('userPhone').value = '+998 ';
-            btn.innerText = "Navbatni Tasdiqlash";
-            btn.disabled = false;
-            renderZakaslar();
+            btn.innerText = "Navbatni Tasdiqlash"; btn.disabled = false;
             switchPage('home');
         }
 
         function switchPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             const index = ['home', 'booking', 'services', 'contacts'].indexOf(id);
             if(index !== -1) document.querySelectorAll('.nav-item')[index].classList.add('active');
-            
             window.scrollTo(0, 0);
         }
 
         document.getElementById('userPhone').addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
             if (!x[1]) { e.target.value = '+998 '; return; }
-            e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+            e.target.value = '+998 ' + (x[2] ? ' (' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
         window.onload = loadAllData;
