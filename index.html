@@ -96,6 +96,7 @@
             display: block;
         }
 
+        /* ULUGBEK: KATTA TUGMALAR VA BANNER STILLARI QAYTARILDI */
         .hero-banner {
             background: white;
             border-radius: var(--card-radius);
@@ -186,8 +187,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: opacity 0.2s;
+            margin-bottom: 10px;
         }
-        .submit-btn:disabled { background: #d2d2d7; cursor: not-allowed; }
 
         .back-btn {
             background: none;
@@ -234,6 +235,16 @@
             border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;
         }
 
+        /* ZAKASLAR RO'YXATI UCHUN JADVAL */
+        .zakas-card {
+            background: #f5f5f7;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            border-left: 4px solid #ff9500;
+        }
+
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -275,7 +286,7 @@
     <header>
         <div class="logo-area" onclick="switchPage('home')">
             <svg class="icon" style="color:var(--apple-blue);"><use href="#icon-tooth"/></svg>
-            <h1 id="siteTitleDisplay">Yuklanmoqda...</h1>
+            <h1 id="siteTitleDisplay">Dr. Shoxjahon</h1>
         </div>
         <button class="admin-trigger" onclick="checkAdmin()">
             <svg class="icon"><use href="#icon-gear"/></svg>
@@ -289,9 +300,10 @@
             <div class="hero-banner">
                 <h2 id="mainHeadingDisplay">Mukammal Tabassum</h2>
                 <p id="mainDescDisplay">Premium xizmat ko'rsatish markazi</p>
-                <div class="bio-box" id="bioDisplay">Yuklanmoqda...</div>
+                <div class="bio-box" id="bioDisplay">Klinikamiz ko'p yillik tajribaga ega shifokorlar bilan tishlaringiz salomatligini ishonchli himoya qiladi.</div>
             </div>
 
+            <!-- CHIROYLI KATTA TUGMALAR TIKLANDI -->
             <button class="apple-card-btn" onclick="switchPage('booking')">
                 <div class="btn-main-info">
                     <div class="btn-circle-icon ic-blue"><svg class="icon"><use href="#icon-calendar"/></svg></div>
@@ -371,8 +383,18 @@
         <!-- ADMIN PANEL -->
         <div id="adminPanel" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Chiqish</button>
+            
+            <!-- YANGI: ZAKASLAR RO'YXATI (ADMIN PANELNING ENG TEPASIDA) -->
+            <div class="info-card" style="border: 2px solid #ff9500;">
+                <div class="info-title">📥 Kelgan Zakaslar (Buyurtmalar)</div>
+                <div id="zakaslarRooxati" style="max-height: 250px; overflow-y: auto;">
+                    <p style="color:var(--apple-text-gray); text-align:center;">Hozircha yangi zakaslar yo'q...</p>
+                </div>
+                <button class="submit-btn" onclick="clearZakaslar()" style="background:#ff3b30; margin-top:10px; font-size:13px; padding:8px;">Zakaslar ro'yxatini tozalash</button>
+            </div>
+
             <div class="info-card">
-                <div class="info-title">⚙️ Global Tahrirlash Paneli</div>
+                <div class="info-title">⚙️ Tahrirlash Sozlamalari</div>
                 <div class="form-group"><label>Sayt nomi</label><input type="text" id="editSiteTitle" class="apple-input"></div>
                 <div class="form-group"><label>Asosiy sarlavha</label><input type="text" id="editMainHeading" class="apple-input"></div>
                 <div class="form-group"><label>Kichik tavsif</label><input type="text" id="editMainDesc" class="apple-input"></div>
@@ -382,7 +404,7 @@
                 <div class="form-group"><label>Shifokorlar (Ism = Lavozim)</label><textarea id="editDoctors" rows="3" class="apple-input"></textarea></div>
                 <div class="form-group"><label>Xizmatlar (Nomi = Narxi)</label><textarea id="editServices" rows="3" class="apple-input"></textarea></div>
                 
-                <button class="submit-btn" onclick="saveAdminSettings()" id="saveBtn">O'zgarishlarni Saqlash</button>
+                <button class="submit-btn" onclick="saveAdminSettings()">O'zgarishlarni Mahalliy Saqlash</button>
             </div>
         </div>
 
@@ -398,14 +420,11 @@
     <script>
         const BOT_TOKEN = '8615273402:AAH1BAeAbQ18c2AW54qBr6IzyeZnQM2KfTc'; 
         const GURUX_USERNAME = 'dental_shoox';
-        
-        // FIREBASE REALTIME DATABASE - ENG BARQOROR VA TEZKOR SIZNING BAZANGIZ
-        const DB_URL = 'https://dental-shox-default-rtdb.firebaseio.com/settings.json';
 
         let defaultSettings = {
             siteTitle: "Dr. Shoxjahon",
             mainHeading: "Mukammal Tabassum",
-            mainDesc: "Premium darajadagi zamonaviy stomatologiya xizmati.",
+            mainDesc: "Premium xizmat ko'rsatish markazi",
             bio: "Klinikamiz ko'p yillik tajribaga ega shifokorlar bilan tishlaringiz salomatligini ishonchli himoya qiladi.",
             workTime: "7:00 - 19:00",
             clinicPhone: "+998919677750",
@@ -414,80 +433,93 @@
         };
 
         let settings = defaultSettings;
+        let zakaslar = [];
 
-        // BAZADAN ONLINE YUKLASH TIZIMI
-        function loadSettings() {
-            fetch(DB_URL)
-                .then(res => res.json())
-                .then(data => {
-                    if(data) {
-                        settings = data;
-                    } else {
-                        settings = defaultSettings;
-                    }
-                    updateDOM();
-                })
-                .catch(() => {
-                    // Agar internetda muammo bo'lsa zaxira ma'lumotlarni ochadi (sayt sinib qolmaydi)
-                    settings = defaultSettings;
-                    updateDOM();
-                });
+        function loadAllData() {
+            // Sozlamalarni yuklash
+            const localSaved = localStorage.getItem('clinic_settings_v2');
+            if(localSaved) {
+                settings = JSON.parse(localSaved);
+            }
+            // Zakaslarni yuklash
+            const localZakas = localStorage.getItem('clinic_orders_v2');
+            if(localZakas) {
+                zakaslar = JSON.parse(localZakas);
+            }
+            updateDOM();
+            renderZakaslar();
         }
 
         function updateDOM() {
-            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle || "Dr. Shoxjahon";
-            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading || "";
-            document.getElementById('mainDescDisplay').innerText = settings.mainDesc || "";
-            document.getElementById('bioDisplay').innerText = settings.bio || "";
-            document.getElementById('workTimeDisplay').innerText = settings.workTime || "";
-            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone || "";
+            document.getElementById('siteTitleDisplay').innerText = settings.siteTitle || defaultSettings.siteTitle;
+            document.getElementById('mainHeadingDisplay').innerText = settings.mainHeading || defaultSettings.mainHeading;
+            document.getElementById('mainDescDisplay').innerText = settings.mainDesc || defaultSettings.mainDesc;
+            document.getElementById('bioDisplay').innerText = settings.bio || defaultSettings.bio;
+            document.getElementById('workTimeDisplay').innerText = settings.workTime || defaultSettings.workTime;
+            document.getElementById('clinicPhoneDisplay').innerText = settings.clinicPhone || defaultSettings.clinicPhone;
 
             const listDisplay = document.getElementById('servicesListDisplay');
             const selectElement = document.getElementById('serviceTypeSelect');
             listDisplay.innerHTML = ''; selectElement.innerHTML = '';
 
-            if(settings.servicesText) {
-                settings.servicesText.split('\n').forEach(line => {
-                    if(line.includes('=')) {
-                        const [name, price] = line.split('=');
-                        listDisplay.innerHTML += `<div class="info-row"><span class="info-label">🦷 ${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
-                        selectElement.innerHTML += `<option>${name.trim()}</option>`;
-                    }
-                });
-            }
+            let txtS = settings.servicesText || defaultSettings.servicesText;
+            txtS.split('\n').forEach(line => {
+                if(line.includes('=')) {
+                    const [name, price] = line.split('=');
+                    listDisplay.innerHTML += `<div class="info-row"><span class="info-label">🦷 ${name.trim()}</span><span class="info-value">${price.trim()}</span></div>`;
+                    selectElement.innerHTML += `<option>${name.trim()}</option>`;
+                }
+            });
 
             const docsDisplay = document.getElementById('doctorsListDisplay');
             docsDisplay.innerHTML = '';
-            if(settings.doctorsText) {
-                settings.doctorsText.split('\n').forEach(line => {
-                    if(line.includes('=')) {
-                        const [docName, docSpec] = line.split('=');
-                        docsDisplay.innerHTML += `<div class="doctor-card-item"><div class="doc-avatar">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
-                    }
-                });
+            let txtD = settings.doctorsText || defaultSettings.doctorsText;
+            txtD.split('\n').forEach(line => {
+                if(line.includes('=')) {
+                    const [docName, docSpec] = line.split('=');
+                    docsDisplay.innerHTML += `<div class="doctor-card-item"><div class="doc-avatar">👨‍⚕️</div><div><div style="font-weight:600; font-size:16px;">${docName.trim()}</div><div style="color:var(--apple-text-gray); font-size:13px;">${docSpec.trim()}</div></div></div>`;
+                }
+            });
+        }
+
+        function renderZakaslar() {
+            const box = document.getElementById('zakaslarRooxati');
+            if(zakaslar.length === 0) {
+                box.innerHTML = `<p style="color:var(--apple-text-gray); text-align:center; padding:10px;">Hozircha yangi zakaslar yo'q...</p>`;
+                return;
             }
+            box.innerHTML = '';
+            zakaslar.reverse().forEach((z, index) => {
+                box.innerHTML += `
+                    <div class="zakas-card">
+                        <b>№ ${zakaslar.length - index} | ${z.date} - ${z.time}</b><br>
+                        👤 <b>Ism:</b> ${z.name}<br>
+                        📞 <b>Tel:</b> ${z.phone}<br>
+                        📍 <b>Manzil:</b> ${z.address}<br>
+                        🦷 <b>Xizmat:</b> ${z.service}
+                    </div>
+                `;
+            });
+            zakaslar.reverse(); // asliga qaytarish
         }
 
         function checkAdmin() {
             if (prompt('Admin parolini kiriting:') === '123') {
-                document.getElementById('editSiteTitle').value = settings.siteTitle || "";
-                document.getElementById('editMainHeading').value = settings.mainHeading || "";
-                document.getElementById('editMainDesc').value = settings.mainDesc || "";
-                document.getElementById('editBio').value = settings.bio || "";
-                document.getElementById('editWorkTime').value = settings.workTime || "";
-                document.getElementById('editClinicPhone').value = settings.clinicPhone || "";
-                document.getElementById('editDoctors').value = settings.doctorsText || "";
-                document.getElementById('editServices').value = settings.servicesText || "";
+                document.getElementById('editSiteTitle').value = settings.siteTitle || defaultSettings.siteTitle;
+                document.getElementById('editMainHeading').value = settings.mainHeading || defaultSettings.mainHeading;
+                document.getElementById('editMainDesc').value = settings.mainDesc || defaultSettings.mainDesc;
+                document.getElementById('editBio').value = settings.bio || defaultSettings.bio;
+                document.getElementById('editWorkTime').value = settings.workTime || defaultSettings.workTime;
+                document.getElementById('editClinicPhone').value = settings.clinicPhone || defaultSettings.clinicPhone;
+                document.getElementById('editDoctors').value = settings.doctorsText || defaultSettings.doctorsText;
+                document.getElementById('editServices').value = settings.servicesText || defaultSettings.servicesText;
+                renderZakaslar();
                 switchPage('adminPanel');
             } else { alert('Parol noto\'g\'ri!'); }
         }
 
         function saveAdminSettings() {
-            const btn = document.getElementById('saveBtn');
-            btn.innerText = "Firebase bazaga saqlanmoqda...";
-            btn.disabled = true;
-
-            const updatedSettings = {
+            settings = {
                 siteTitle: document.getElementById('editSiteTitle').value,
                 mainHeading: document.getElementById('editMainHeading').value,
                 mainDesc: document.getElementById('editMainDesc').value,
@@ -498,29 +530,18 @@
                 servicesText: document.getElementById('editServices').value
             };
 
-            // PUT METODI BILAN GOOGLE FIREBASEGA SAQLASH
-            fetch(DB_URL, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedSettings)
-            })
-            .then(res => {
-                if(!res.ok) throw new Error();
-                return res.json();
-            })
-            .then(data => {
-                alert("✅ Muammosiz saqlandi! Endi barcha mijozlar smartfonida yangi narxlar zaxoti ko'rinadi.");
-                settings = data;
-                btn.innerText = "O'zgarishlarni Saqlash";
-                btn.disabled = false;
-                updateDOM();
-                switchPage('home');
-            })
-            .catch(() => {
-                alert("Ulanishda xatolik. Internetni tekshirib qayta urining.");
-                btn.innerText = "O'zgarishlarni Saqlash";
-                btn.disabled = false;
-            });
+            localStorage.setItem('clinic_settings_v2', JSON.stringify(settings));
+            alert("✅ Sozlamalar muvaffaqiyatli saqlandi!");
+            updateDOM();
+            switchPage('home');
+        }
+
+        function clearZakaslar() {
+            if(confirm("Barcha zakaslarni o'chirib tashlamoqchimisiz?")) {
+                zakaslar = [];
+                localStorage.removeItem('clinic_orders_v2');
+                renderZakaslar();
+            }
         }
 
         function sendData(e) {
@@ -536,6 +557,12 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
+            // 1. ZAKASNI ADMIN PANEL UCHUN LOCALXOTIRAGA SAQLASH
+            const yangiZakas = { name, phone, address, service, date, time };
+            zakaslar.push(yangiZakas);
+            localStorage.setItem('clinic_orders_v2', JSON.stringify(zakaslar));
+
+            // 2. TELEGRAMGA YUBORISH TIZIMI
             const xabar = `<b>🔔 YANGI NAVBAT KELDI!</b>\n\n👤 <b>Bemor:</b> ${name}\n📞 <b>Tel:</b> ${phone}\n📍 <b>Manzil:</b> ${address}\n🦷 <b>Xizmat:</b> ${service}\n📅 <b>Sana:</b> ${date} | ⏰ <b>Vaqt:</b> ${time}`;
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -543,16 +570,19 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: `@${GURUX_USERNAME}`, text: xabar, parse_mode: "HTML" })
             }).then(() => {
-                alert('✅ Navbatingiz muvaffaqiyatli qabul qilindi va Telegram guruhga yuborildi!');
+                alert('✅ Navbatingiz guruhga yuborildi va Admin panelga saqlandi!');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 btn.disabled = false;
                 switchPage('home');
             }).catch(() => {
-                alert('Xatolik yuz berdi. Internetni tekshiring.');
+                alert('Telegram guruhga ketmadi, lekin zakasingiz Admin panelingizda saqlanib qoldi!');
+                document.getElementById('appointmentForm').reset();
+                document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 btn.disabled = false;
+                switchPage('home');
             });
         }
 
@@ -571,7 +601,7 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        window.onload = loadSettings;
+        window.onload = loadAllData;
     </script>
 </body>
 </html>
