@@ -4,128 +4,41 @@ const form = document.getElementById("bookingForm");
 const dateInput = document.getElementById("date");
 const timeSelect = document.getElementById("time");
 
-// Bugungi sanadan oldingi kunlarni bloklash
+const TIMES = [
+"08:00",
+"09:00",
+"10:00",
+"11:00",
+"12:00",
+"13:00",
+"14:00",
+"15:00",
+"16:00",
+"17:00",
+"18:00",
+"19:00",
+"20:00"
+];
+
+// Bugungi sanani minimal sana qilish
 const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, "0");
-const dd = String(today.getDate()).padStart(2, "0");
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, "0");
+const day = String(today.getDate()).padStart(2, "0");
+// Band vaqtlarni yashirish
+async function updateAvailableTimes() {
 
-dateInput.min = `${yyyy}-${mm}-${dd}`;
-
-// Vaqtlarni olish
-async function loadBusyTimes() {
-
-    if (!dateInput.value) return;
-
-    const response = await fetch(API_URL);
-    const data = await response.json();
-
-    const options = timeSelect.querySelectorAll("option");
-
-    options.forEach(option => {
-
-        if (option.value === "") return;
-
-        option.disabled = false;
-        option.hidden = false;
-
-    });
-
-    data.forEach(item => {
-
-        if (item.date === dateInput.value) {
-
-            options.forEach(option => {
-
-                if (option.value === item.time) {
-
-                    option.disabled = true;
-                    option.hidden = true;
-
-                }
-
-            });
-
-        }
-
-    });
-
-}
-
-dateInput.addEventListener("change", loadBusyTimes);
-form.addEventListener("submit", async function (e) {
-
-    e.preventDefault();
-
-    const booking = {
-
-        data: {
-
-            name: document.getElementById("fullname").value,
-
-            phone: document.getElementById("phone").value,
-
-            address: "Surxondaryo, Sho'rchi",
-
-            service: document.getElementById("service").value,
-
-            date: document.getElementById("date").value,
-
-            time: document.getElementById("time").value
-
-        }
-
-    };
-
-    try {
-
-        const response = await fetch(API_URL, {
-
-            method: "POST",
-
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify(booking)
-
-        });
-
-        if (response.ok) {
-
-            alert("✅ Qabulingiz muvaffaqiyatli yaratildi!\n\nTez orada siz bilan bog'lanamiz.");
-
-            form.reset();
-
-            loadBusyTimes();
-
-        } else {
-
-            alert("❌ Xatolik yuz berdi. Qaytadan urinib ko'ring.");
-
-        }
-
-    } catch (error) {
-
-        alert("❌ Internet yoki server bilan bog'liq muammo.");
-
-    }
-
-});
-// Bugungi o'tib ketgan vaqtlarni yashirish
-function hidePastTimes() {
+    renderTimes();
 
     if (!dateInput.value) return;
+
+    const bookings = await getBookings();
+
+    const selectedDate = dateInput.value;
 
     const now = new Date();
 
     const todayString = now.toISOString().split("T")[0];
-
-    if (dateInput.value !== todayString) return;
-
-    const currentHour = now.getHours();
 
     const options = timeSelect.querySelectorAll("option");
 
@@ -133,12 +46,29 @@ function hidePastTimes() {
 
         if (!option.value) return;
 
-        const hour = parseInt(option.value.split(":")[0]);
+        // Band vaqtlarni yashirish
+        bookings.forEach(item => {
 
-        if (hour <= currentHour) {
+            if (item.date === selectedDate && item.time === option.value) {
 
-            option.hidden = true;
-            option.disabled = true;
+                option.disabled = true;
+                option.hidden = true;
+
+            }
+
+        });
+
+        // Bugungi o'tib ketgan vaqtlarni yashirish
+        if (selectedDate === todayString) {
+
+            const hour = parseInt(option.value.split(":")[0]);
+
+            if (hour <= now.getHours()) {
+
+                option.disabled = true;
+                option.hidden = true;
+
+            }
 
         }
 
@@ -146,74 +76,59 @@ function hidePastTimes() {
 
 }
 
-// Sana o'zgarganda ishlaydi
-dateInput.addEventListener("change", () => {
+dateInput.addEventListener("change", updateAvailableTimes);
 
-    loadBusyTimes();
+// Telefon raqamini tekshirish
+const phoneInput = document.getElementById("phone");
 
-    hidePastTimes();
+phoneInput.addEventListener("input", () => {
 
-});// Formani yuborishdan oldin vaqtni qayta tekshirish
-async function isTimeAvailable(date, time) {
+    phoneInput.value = phoneInput.value.replace(/[^\d+]/g, "");
 
-    const response = await fetch(API_URL);
-    const bookings = await response.json();
-
-    return !bookings.some(item =>
-        item.date === date &&
-        item.time === time
-    );
-
-}
-
-form.addEventListener("submit", async function (e) {
+});
+// Formani yuborish
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
     const submitBtn = form.querySelector("button");
 
     submitBtn.disabled = true;
-    submitBtn.innerText = "Yuborilmoqda...";
-
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-
-    const available = await isTimeAvailable(date, time);
-
-    if (!available) {
-
-        alert("❌ Bu vaqt allaqachon band. Iltimos boshqa vaqtni tanlang.");
-
-        loadBusyTimes();
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Qabulga yozilish";
-
-        return;
-
-    }
+    submitBtn.textContent = "Yuborilmoqda...";
 
     const booking = {
-
         data: {
-
-            name: document.getElementById("fullname").value,
-
-            phone: document.getElementById("phone").value,
-
+            name: document.getElementById("fullname").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
             address: "Surxondaryo, Sho'rchi",
-
             service: document.getElementById("service").value,
-
-            date: date,
-
-            time: time
-
+            date: document.getElementById("date").value,
+            time: document.getElementById("time").value
         }
-
     };
 
     try {
+
+        // Qayta tekshirish
+        const bookings = await getBookings();
+
+        const busy = bookings.some(item =>
+            item.date === booking.data.date &&
+            item.time === booking.data.time
+        );
+
+        if (busy) {
+
+            alert("❌ Bu vaqt allaqachon band. Boshqa vaqtni tanlang.");
+
+            updateAvailableTimes();
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Qabulga yozilish";
+
+            return;
+
+        }
 
         const response = await fetch(API_URL, {
 
@@ -229,25 +144,27 @@ form.addEventListener("submit", async function (e) {
 
         if (response.ok) {
 
-            alert("✅ Qabul muvaffaqiyatli yaratildi!");
+            alert("✅ Qabulingiz muvaffaqiyatli yaratildi!\nTez orada siz bilan bog'lanamiz.");
 
             form.reset();
 
-            loadBusyTimes();
+            renderTimes();
 
         } else {
 
-            alert("❌ Ma'lumot yuborilmadi.");
+            alert("❌ Ma'lumot yuborishda xatolik.");
 
         }
 
-    } catch (err) {
+    } catch (error) {
 
-        alert("❌ Internet bilan bog'liq muammo.");
+        console.error(error);
+
+        alert("❌ Internet yoki server bilan bog'liq muammo.");
 
     }
 
     submitBtn.disabled = false;
-    submitBtn.innerText = "Qabulga yozilish";
+    submitBtn.textContent = "Qabulga yozilish";
 
 });
