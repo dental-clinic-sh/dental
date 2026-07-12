@@ -419,7 +419,7 @@
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card" style="background: linear-gradient(135deg, #0071e3, #005bb5); color: white;">
                 <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Tezkor Navbat Tizimi</h3>
-                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari to'g'ridan-to'g'ri Telegramingizga yuboriladi.</p>
+                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari to'g'ridan-to'g'ri Telegram guruhingizga yuboriladi.</p>
             </div>
 
             <form id="appointmentForm" onsubmit="sendData(event)">
@@ -475,13 +475,13 @@
             </div>
         </div>
 
-        <!-- ADMIN PANEL (FAQAT SOZLAMALAR QOLDI - XATOLIK BERUVCHI BAZA TO'LIQ OLIB TASHLANDI) -->
+        <!-- ADMIN PANEL -->
         <div id="adminPanel" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Chiqish</button>
             
             <div class="info-card">
                 <h4 style="font-weight:700; margin-bottom:12px; color:var(--apple-blue);">⚙️ Klinika Tahrirlash Paneli</h4>
-                <p style="font-size: 13px; color:gray; margin-bottom: 15px;">Kelgan mijozlar ro'yxati 100% xavfsiz tarzda faqat Telegram guruh/botingizga boradi.</p>
+                <p style="font-size: 13px; color:gray; margin-bottom: 15px;">Kelgan mijozlar ro'yxati faqat Telegram guruhingizga yuboriladi.</p>
                 
                 <div class="form-group">
                     <label>Logo matni</label>
@@ -542,9 +542,9 @@
     </div>
 
     <script>
-        // 💬 Telegram Bot Sozlamalari
+        // 💬 Telegram Bot va Guruh Sozlamalari (To'liq sozlangan)
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
-        const CHAT_ID = '7017291129'; 
+        const CHAT_ID = '-1004317265736'; // Sizning guruhingiz IDsi
         const ADMIN_PASSWORD = '123';
 
         const defaultSettings = {
@@ -647,7 +647,7 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 NAFBATLAR FAQAT TELEGRAMGA BORADI
+        // 🟢 NAVBAT MA'LUMOTLARINI GURUXGA YUBORISH
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -660,7 +660,7 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // Telegram chiroyli xabar formati
+            // Xabarni chiroyli formatda tayyorlash
             const xabar = `🔔 **YANGI BEMOR NAVBATI!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date}\n⏰ **Vaqt:** ${time}`;
             
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -668,15 +668,16 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
             })
-            .then(() => {
-                alert('✅ Rahmat! Navbatingiz muvaffaqiyatli yozildi va shifokorga yuborildi.');
+            .then(res => {
+                if (!res.ok) throw new Error();
+                alert('✅ Rahmat! Navbatingiz muvaffaqiyatli yozildi va guruhga yuborildi.');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             })
             .catch(() => {
-                alert('⚠️ Internet aloqasi past. Qayta urinib ko\'ring.');
+                alert('⚠️ Xatolik yuz berdi. Bot guruhga qo\'shilganini tekshiring yoki qayta urinib ko\'ring.');
                 btn.innerText = "Navbatni Tasdiqlash";
             });
         }
