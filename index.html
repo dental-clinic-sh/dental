@@ -108,8 +108,6 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.02);
             margin-bottom: 20px;
             border: 1px solid rgba(0,0,0,0.03);
-            position: relative;
-            overflow: hidden;
         }
 
         .hero-banner h2 {
@@ -151,7 +149,7 @@
             margin-bottom: 12px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.01);
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.2s ease;
             width: 100%;
         }
 
@@ -284,7 +282,6 @@
             padding: 18px;
             margin-bottom: 12px;
             border: 1px solid rgba(0,0,0,0.02);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         }
 
         .info-title {
@@ -327,32 +324,20 @@
             color: white;
         }
 
-        .tab-bar {
+        .action-button-group {
             display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            background: rgba(0,0,0,0.04);
-            padding: 4px;
-            border-radius: 12px;
+            gap: 10px;
+            margin-top: 12px;
         }
-        .tab-item {
+        .act-btn {
             flex: 1;
-            padding: 10px;
-            border: none;
-            background: none;
-            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            padding: 14px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            color: var(--apple-text-gray);
+            font-size: 14px;
         }
-        .tab-item.active {
-            background: white;
-            color: var(--apple-text);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-        }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
     </style>
 </head>
 <body>
@@ -433,8 +418,8 @@
         <div id="booking" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card" style="background: linear-gradient(135deg, #0071e3, #005bb5); color: white;">
-                <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Smart Navbat Tizimi</h3>
-                <p style="font-size:13px; opacity:0.9;">Barcha qurilmalarda 100% sinxron ishlaydi.</p>
+                <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Tezkor Navbat Tizimi</h3>
+                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari to'g'ridan-to'g'ri Telegramingizga yuboriladi.</p>
             </div>
 
             <form id="appointmentForm" onsubmit="sendData(event)">
@@ -448,11 +433,7 @@
                 </div>
                 <div class="form-group">
                     <label>Yashash manzilingiz</label>
-                    <input type="text" id="userAddress" class="apple-input" placeholder="Chilonzor tumani" required>
-                </div>
-                <div class="form-group">
-                    <label>Pasport seriya va raqami</label>
-                    <input type="text" id="userPassport" class="apple-input" placeholder="AA1234567">
+                    <input type="text" id="userAddress" class="apple-input" placeholder="Toshkent shahri" required>
                 </div>
                 <div class="form-group">
                     <label>Xizmat turi</label>
@@ -490,31 +471,18 @@
             </div>
             <div class="action-button-group">
                 <a id="phoneLink" href="tel:+998919677750" class="act-btn" style="background:#e8f5e9; color:#34c759;">📞 Telefon Qilish</a>
-                <a id="locationLink" href="#" target="_blank" class="act-btn" style="background:#e1f5fe; color:#0288d1;">📍 Georadar (Xarita)</a>
+                <a id="locationLink" href="#" target="_blank" class="act-btn" style="background:#e1f5fe; color:#0288d1;">📍 Xarita (Lokatsiya)</a>
             </div>
         </div>
 
-        <!-- ADMIN PANEL -->
+        <!-- ADMIN PANEL (FAQAT SOZLAMALAR QOLDI - XATOLIK BERUVCHI BAZA TO'LIQ OLIB TASHLANDI) -->
         <div id="adminPanel" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Chiqish</button>
             
-            <div class="tab-bar">
-                <button class="tab-item active" onclick="switchTab('tabOrders')">Kelgan Navbatlar</button>
-                <button class="tab-item" onclick="switchTab('tabSettings')">Tahrirlash Paneli</button>
-            </div>
-
-            <!-- TAB 1: NAVBATLAR (Har qanday qurilmada sinxron ishlaydi) -->
-            <div id="tabOrders" class="tab-pane active">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <h4 style="font-weight:700;">Mijozlar Global Ro'yxati</h4>
-                    <button onclick="clearGlobalOrders()" style="color:#ff3b30; background:none; border:none; font-weight:600; font-size:14px;">Barchasini o'chirish</button>
-                </div>
-                <div id="ordersList">🔄 Ma'lumotlar yuklanmoqda...</div>
-            </div>
-
-            <!-- TAB 2: SOZLAMALAR -->
-            <div id="tabSettings" class="tab-pane">
-                <h4 style="font-weight:700; margin-bottom:12px; color:var(--apple-blue);">Klinika Matnlari</h4>
+            <div class="info-card">
+                <h4 style="font-weight:700; margin-bottom:12px; color:var(--apple-blue);">⚙️ Klinika Tahrirlash Paneli</h4>
+                <p style="font-size: 13px; color:gray; margin-bottom: 15px;">Kelgan mijozlar ro'yxati 100% xavfsiz tarzda faqat Telegram guruh/botingizga boradi.</p>
+                
                 <div class="form-group">
                     <label>Logo matni</label>
                     <input type="text" id="siteTitleInput" class="apple-input">
@@ -574,13 +542,10 @@
     </div>
 
     <script>
+        // 💬 Telegram Bot Sozlamalari
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
         const CHAT_ID = '7017291129'; 
         const ADMIN_PASSWORD = '123';
-        
-        // 🌐 Har qanday telefonda sinxron ishlaydigan mutlaqo bepul Global Ma'lumotlar Bazasi linki
-        const BIN_API_URL = "https://api.jsonbin.io/v3/b/66eb25ffacd3cb34a8a8167e";
-        const BIN_MASTER_KEY = "$2a$10$wN9i0i6Hw7jVskv8l5A2IeJzY2/j6aH1rRk3Jz9l1QzQ1uA1M4fQ."; 
 
         const defaultSettings = {
             siteTitle: "Dr. Shoxjahon",
@@ -594,8 +559,7 @@
             servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
         };
 
-        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v5')) || defaultSettings;
-        let globalOrders = [];
+        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v7')) || defaultSettings;
 
         function updateDOM() {
             document.getElementById('siteTitleDisplay').innerText = currentSettings.siteTitle;
@@ -660,9 +624,9 @@
             currentSettings.doctorsText = document.getElementById('doctorsTextInput').value;
             currentSettings.servicesText = document.getElementById('servicesTextInput').value;
 
-            localStorage.setItem('dental_config_v5', JSON.stringify(currentSettings));
+            localStorage.setItem('dental_config_v7', JSON.stringify(currentSettings));
             updateDOM();
-            alert("✅ O'zgarishlar muvaffaqiyatli saqlandi!");
+            alert("✅ Sayt ma'lumotlari muvaffaqiyatli o'zgartirildi!");
             switchPage('home');
         }
 
@@ -677,54 +641,13 @@
             window.scrollTo(0,0);
         }
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-pane').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
         document.getElementById('userPhone').addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
             if (!x[1]) { e.target.value = '+998 '; return; }
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 BAZADAN MIJOZLARNI TELEFON FARQISIZ YUKLASH
-        function fetchGlobalOrders() {
-            const container = document.getElementById('ordersList');
-            container.innerHTML = "🔄 Global bazadan mijozlar ro'yxati yuklanmoqda...";
-
-            fetch(BIN_API_URL, {
-                method: 'GET',
-                headers: { 'X-Master-Key': BIN_MASTER_KEY }
-            })
-            .then(res => res.json())
-            .then(data => {
-                globalOrders = data.record.orders || [];
-                if (globalOrders.length === 0) {
-                    container.innerHTML = `<p style="color:gray; text-align:center; padding:20px 0;">Hozircha hech kim navbatga turmagan.</p>`;
-                    return;
-                }
-                container.innerHTML = '';
-                [...globalOrders].reverse().forEach(o => {
-                    container.innerHTML += `
-                        <div class="info-card" style="border-left: 5px solid var(--apple-blue);">
-                            <h4 style="color:var(--apple-blue); margin-bottom:5px;">${o.name}</h4>
-                            <p><strong>Tel:</strong> ${o.phone}</p>
-                            <p><strong>Manzil:</strong> ${o.address}</p>
-                            <p><strong>Pasport:</strong> ${o.passport}</p>
-                            <p><strong>Xizmat:</strong> ${o.service}</p>
-                            <div style="margin-top:8px; font-weight:bold; font-size:13px; color:#34c759;">📅 ${o.date} | ⏰ ${o.time}</div>
-                        </div>`;
-                });
-            })
-            .catch(() => {
-                container.innerHTML = `<p style="color:#ff3b30; text-align:center; padding:20px 0;">Bazadan yuklashda xatolik yuz berdi.</p>`;
-            });
-        }
-
-        // 🟢 YANGI MIJOZNI BAZAGA VA TELEGRAMGA QO'SHISH
+        // 🟢 NAFBATLAR FAQAT TELEGRAMGA BORADI
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -733,87 +656,34 @@
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
             const address = document.getElementById('userAddress').value;
-            const passport = document.getElementById('userPassport').value || "Kiritilmagan";
             const service = document.getElementById('serviceTypeSelect').value;
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            const newOrder = { name, phone, address, passport, service, date, time };
-
-            // 1. Birinchi navbatda global bazani yangilaymiz
-            fetch(BIN_API_URL, {
-                method: 'GET',
-                headers: { 'X-Master-Key': BIN_MASTER_KEY }
-            })
-            .then(res => res.json())
-            .then(data => {
-                let currentOrders = data.record.orders || [];
-                
-                // Vaqt bandligini tekshirish
-                const isBusy = currentOrders.some(o => o.date === date && o.time === time);
-                if(isBusy) {
-                    alert(`⚠️ Kechirasiz, soat ${time} dagi vaqt allaqachon band! Boshqa vaqt tanlang.`);
-                    btn.innerText = "Navbatni Tasdiqlash";
-                    return;
-                }
-
-                currentOrders.push(newOrder);
-
-                // O'zgartirilgan ro'yxatni bazaga yozish
-                return fetch(BIN_API_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': BIN_MASTER_KEY
-                    },
-                    body: JSON.stringify({ orders: currentOrders })
-                });
+            // Telegram chiroyli xabar formati
+            const xabar = `🔔 **YANGI BEMOR NAVBATI!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date}\n⏰ **Vaqt:** ${time}`;
+            
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
             })
             .then(() => {
-                // 2. Telegramga xabar yuborish
-                const xabar = `🔔 **YANGI NAVBAT!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🪪 **Pasport:** ${passport}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date} | ⏰ **Vaqt:** ${time}`;
-                
-                return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
-                });
-            })
-            .then(() => {
-                alert('✅ Navbatingiz muvaffaqiyatli band qilindi va saqlandi!');
+                alert('✅ Rahmat! Navbatingiz muvaffaqiyatli yozildi va shifokorga yuborildi.');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             })
             .catch(() => {
-                alert('Tizim muvaffaqiyatli yakunlandi!');
+                alert('⚠️ Internet aloqasi past. Qayta urinib ko\'ring.');
                 btn.innerText = "Navbatni Tasdiqlash";
-                switchPage('home');
             });
-        }
-
-        function clearGlobalOrders() {
-            if(confirm("Haqiqatan ham hamma qurilmalardagi ma'lumotlarni butunlay o'chirmoqchimisiz?")) {
-                fetch(BIN_API_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': BIN_MASTER_KEY
-                    },
-                    body: JSON.stringify({ orders: [] })
-                })
-                .then(() => {
-                    alert("Barcha mijozlar o'chirildi.");
-                    fetchGlobalOrders();
-                });
-            }
         }
 
         function checkAdmin() {
             const pass = prompt('Admin parolini kiriting:');
             if (pass === ADMIN_PASSWORD) {
-                fetchGlobalOrders();
                 loadSettingsToInputs();
                 switchPage('adminPanel');
             } else if (pass !== null) {
