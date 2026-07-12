@@ -419,7 +419,7 @@
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card" style="background: linear-gradient(135deg, #0071e3, #005bb5); color: white;">
                 <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Tezkor Navbat Tizimi</h3>
-                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari to'g'ridan-to'g'ri Telegram guruhingizga yuboriladi.</p>
+                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari xavfsiz va tezkor ravishda Google Excel jadvaliga saqlanadi.</p>
             </div>
 
             <form id="appointmentForm" onsubmit="sendData(event)">
@@ -481,7 +481,7 @@
             
             <div class="info-card">
                 <h4 style="font-weight:700; margin-bottom:12px; color:var(--apple-blue);">⚙️ Klinika Tahrirlash Paneli</h4>
-                <p style="font-size: 13px; color:gray; margin-bottom: 15px;">Kelgan mijozlar ro'yxati faqat Telegram guruhingizga yuboriladi.</p>
+                <p style="font-size: 13px; color:gray; margin-bottom: 15px;">Kelgan barcha navbatlar to'g'ridan-to'g'ri Google Excel jadvaliga tushadi.</p>
                 
                 <div class="form-group">
                     <label>Logo matni</label>
@@ -542,9 +542,8 @@
     </div>
 
     <script>
-        // 💬 Telegram Bot va Guruh Sozlamalari (To'liq sozlangan)
-        const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
-        const CHAT_ID = '-1004317265736'; // Guruh IDsi
+        // 🛠️ GOOGLE SHEETS JADVALI UCHUN SHEETDB HAVOLASI JOYLASHDI:
+        const SHEETDB_URL = 'https://sheetdb.io/api/v1/e9nazronnimq3'; 
         const ADMIN_PASSWORD = '123';
 
         const defaultSettings = {
@@ -559,7 +558,7 @@
             servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
         };
 
-        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v7')) || defaultSettings;
+        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v9')) || defaultSettings;
 
         function updateDOM() {
             document.getElementById('siteTitleDisplay').innerText = currentSettings.siteTitle;
@@ -624,7 +623,7 @@
             currentSettings.doctorsText = document.getElementById('doctorsTextInput').value;
             currentSettings.servicesText = document.getElementById('servicesTextInput').value;
 
-            localStorage.setItem('dental_config_v7', JSON.stringify(currentSettings));
+            localStorage.setItem('dental_config_v9', JSON.stringify(currentSettings));
             updateDOM();
             alert("✅ Sayt ma'lumotlari muvaffaqiyatli o'zgartirildi!");
             switchPage('home');
@@ -647,7 +646,7 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 NAVBAT MA'LUMOTLARINI GURUXGA YUBORISH (YANGI HTML FORMAT)
+        // 🟢 GOOGLE SHEETS'GA MA'LUMOT YUBORISH FUNKSIYASI
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -660,34 +659,34 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // Xabarni Telegramga xatosiz yuborish uchun HTML formatga o'tkazdik
-            const xabar = `<b>🔔 YANGI BEMOR NAVBATI!</b>\n\n` +
-                          `<b>👤 Bemor:</b> ${name}\n` +
-                          `<b>📞 Tel:</b> ${phone}\n` +
-                          `<b>📍 Manzil:</b> ${address}\n` +
-                          `<b>🦷 Xizmat:</b> ${service}\n` +
-                          `<b>📅 Sana:</b> ${date}\n` +
-                          `<b>⏰ Vaqt:</b> ${time}`;
+            const formData = {
+                data: [
+                    {
+                        name: name,
+                        phone: phone,
+                        address: address,
+                        service: service,
+                        date: date,
+                        time: time
+                    }
+                ]
+            };
             
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            fetch(SHEETDB_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    chat_id: CHAT_ID, 
-                    text: xabar, 
-                    parse_mode: "HTML" // HTML har doim xatosiz ishlaydi
-                })
+                body: JSON.stringify(formData)
             })
             .then(res => {
                 if (!res.ok) throw new Error();
-                alert('✅ Rahmat! Navbatingiz muvaffaqiyatli yozildi va guruhga yuborildi.');
+                alert('✅ Rahmat! Navbatingiz muvaffaqiyatli qabul qilindi.');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             })
             .catch(() => {
-                alert('⚠️ Xatolik yuz berdi. Bot guruhga qo\'shilganini tekshiring yoki qayta urinib ko\'ring.');
+                alert('⚠️ Xatolik yuz berdi. SheetDB tizimi bilan aloqa o\'rnatilmadi.');
                 btn.innerText = "Navbatni Tasdiqlash";
             });
         }
