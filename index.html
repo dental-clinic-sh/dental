@@ -342,7 +342,6 @@
 
     <header>
         <div class="logo-area" onclick="switchPage('home')">
-            <!-- 🗑️ Muammoli logotip rasm qismi butunlay olib tashlandi -->
             <h1>Dental clinic</h1>
         </div>
     </header>
@@ -508,7 +507,6 @@
             window.scrollTo(0,0);
         }
 
-        // Telefon raqam formatlagich
         document.getElementById('userPhone').addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
             if (!x[1]) { e.target.value = '+998 '; return; }
@@ -528,12 +526,15 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // O'zbekiston vaqti bilan tekshirish
+            // 🛠️ O'zbekiston vaqti bilan tekshirish algoritmi
             const now = new Date();
             const selectedDateTime = new Date(`${date}T${time}`);
             
-            if (selectedDateTime < now) {
-                alert("⚠️ O'tib ketgan vaqtga yoki o'tmishdagi sanaga navbat ololmaysiz!");
+            // Hozirgi vaqtdan 5 daqiqa buffer beramiz (mijoz formani to'ldirgunicha vaqt o'tib ketishi hisobiga)
+            const checkNow = new Date(now.getTime() - 5 * 60 * 1000);
+
+            if (selectedDateTime < checkNow) {
+                alert("⚠️ O'tib ketgan vaqtga yoki o'tmishdagi sanaga navbat ololmaysiz! Iltimos, joriy vaqtdan keyingi soatni tanlang.");
                 btn.innerText = "Navbatni Tasdiqlash";
                 btn.disabled = false;
                 return;
@@ -600,7 +601,7 @@
             });
         }
 
-        // 🛠️ BUGUNGI KUNNI TO'G'RI OCHISH (Lokal vaqt zonasi bo'yicha)
+        // Kalendarda bugun va kelgusi kunlarni ochish
         const localNow = new Date();
         const year = localNow.getFullYear();
         const month = String(localNow.getMonth() + 1).padStart(2, '0');
