@@ -40,16 +40,6 @@
             vertical-align: middle;
         }
 
-        /* 🖼️ YANGI ISHONCHLI SERVERDAGI LOGOTIP STILI */
-        .logo-img {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--apple-blue-light);
-            background-color: white;
-        }
-
         header {
             position: sticky;
             top: 0;
@@ -58,7 +48,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 14px 20px;
+            padding: 16px 20px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -67,12 +57,11 @@
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
             cursor: pointer;
         }
 
         .logo-area h1 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, #0071e3, #00b4d8);
@@ -353,8 +342,7 @@
 
     <header>
         <div class="logo-area" onclick="switchPage('home')">
-            <!-- 🔗 Doimiy va o'chib ketmaydigan Postimages serveridagi to'g'ri havola joylashtirildi -->
-            <img class="logo-img" src="https://i.postimg.cc/qMvjCjY5/45963.jpg" alt="Dental Clinic Logo">
+            <!-- 🗑️ Muammoli logotip rasm qismi butunlay olib tashlandi -->
             <h1>Dental clinic</h1>
         </div>
     </header>
@@ -540,7 +528,7 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // 1. O'tib ketgan vaqtni tekshirish
+            // O'zbekiston vaqti bilan tekshirish
             const now = new Date();
             const selectedDateTime = new Date(`${date}T${time}`);
             
@@ -553,7 +541,6 @@
 
             const cleanPhone = phone.replace(/\D/g, '');
 
-            // 2. Bazadan yuklab 1 soatlik vaqt oralig'ini tekshirish
             fetch(SHEETDB_URL)
             .then(res => res.json())
             .then(existingAppointments => {
@@ -575,7 +562,6 @@
                     }
                 }
 
-                // Hamma tekshiruvlar muvaffaqiyatli o'tsa -> yuborish
                 btn.innerText = "Yuborilmoqda...";
                 const formData = {
                     data: [
@@ -614,8 +600,12 @@
             });
         }
 
-        // Kalendarda o'tmish kunlarni tanlashni bloklash
-        document.getElementById('bookDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+        // 🛠️ BUGUNGI KUNNI TO'G'RI OCHISH (Lokal vaqt zonasi bo'yicha)
+        const localNow = new Date();
+        const year = localNow.getFullYear();
+        const month = String(localNow.getMonth() + 1).padStart(2, '0');
+        const day = String(localNow.getDate()).padStart(2, '0');
+        document.getElementById('bookDate').setAttribute('min', `${year}-${month}-${day}`);
     </script>
 </body>
 </html>
