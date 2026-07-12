@@ -17,596 +17,133 @@
             --card-radius: 22px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'SF Pro Display', -apple-system, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--apple-bg);
-            color: var(--apple-text);
-            padding-bottom: 100px;
-            overflow-x: hidden;
-        }
-
-        .icon {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            background: var(--apple-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            z-index: 100;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .logo-area h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #0071e3, #00b4d8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .hero-banner {
-            background: linear-gradient(145deg, #ffffff, #fbfbfd);
-            border-radius: var(--card-radius);
-            padding: 28px 20px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.02);
-            margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        .hero-banner h2 {
-            font-size: 26px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-banner p {
-            color: var(--apple-text-gray);
-            font-size: 15px;
-            line-height: 1.4;
-            max-width: 90%;
-            margin: 0 auto;
-        }
-
-        .bio-box {
-            font-size: 13px;
-            color: #424245;
-            background: var(--apple-blue-light);
-            padding: 14px;
-            border-radius: 14px;
-            margin-top: 16px;
-            text-align: left;
-            line-height: 1.5;
-            border-left: 4px solid var(--apple-blue);
-        }
-
-        .apple-card-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            border: 1px solid rgba(0,0,0,0.02);
-            padding: 20px;
-            border-radius: var(--card-radius);
-            margin-bottom: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-        .apple-card-btn:active {
-            transform: scale(0.97);
-            background: #f2f2f7;
-        }
-
-        .btn-main-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .btn-circle-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ic-blue { background: #e3f2fd; color: #0071e3; }
-        .ic-purple { background: #f3e5f5; color: #af52de; }
-        .ic-orange { background: #fff3e0; color: #ff9500; }
-
-        .btn-txt-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--apple-text);
-            text-align: left;
-        }
-
-        .btn-txt-desc {
-            font-size: 13px;
-            color: var(--apple-text-gray);
-            margin-top: 2px;
-            text-align: left;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--apple-text);
-        }
-
-        .apple-input, select, textarea {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
-            border: 1px solid #d2d2d7;
-            background: white;
-            font-size: 16px;
-            outline: none;
-            color: var(--apple-text);
-        }
-
-        .flex-inputs {
-            display: flex;
-            gap: 10px;
-        }
-
-        .submit-btn {
-            background: var(--apple-blue);
-            color: white;
-            width: 100%;
-            padding: 16px;
-            border-radius: 28px;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: var(--apple-blue);
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 16px;
-            cursor: pointer;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--apple-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
-            z-index: 99;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--apple-text-gray);
-            background: none;
-            border: none;
-            font-size: 11px;
-            font-weight: 500;
-            gap: 4px;
-            cursor: pointer;
-            width: 25%;
-        }
-
-        .nav-item.active { color: var(--apple-blue); font-weight: 600; }
-
-        .info-card {
-            background: white;
-            border-radius: var(--card-radius);
-            padding: 18px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-
-        .info-title {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            font-size: 15px;
-        }
-        .info-row:last-child { border: none; padding-bottom: 0; }
-        .info-label { color: var(--apple-text-gray); }
-        .info-value { font-weight: 600; }
-
-        .doctor-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-        .doctor-row:last-child { border-bottom: none; }
-        .doc-avatar-box {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #0071e3, #00b4d8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .action-button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .act-btn {
-            flex: 1;
-            text-decoration: none;
-            text-align: center;
-            padding: 14px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 14px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'SF Pro Display', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--apple-bg); color: var(--apple-text); padding-bottom: 100px; overflow-x: hidden; }
+        header { position: sticky; top: 0; background: var(--apple-glass); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); z-index: 100; padding: 16px 20px; display: flex; align-items: center; }
+        .logo-area h1 { font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #0071e3, #00b4d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 500px; margin: 0 auto; padding: 16px; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .hero-banner { background: white; border-radius: var(--card-radius); padding: 28px 20px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.02); margin-bottom: 20px; }
+        .apple-card-btn { display: flex; align-items: center; justify-content: space-between; background: white; padding: 20px; border-radius: var(--card-radius); margin-bottom: 12px; cursor: pointer; border: 1px solid rgba(0,0,0,0.03); }
+        .apple-input { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #d2d2d7; background: white; font-size: 16px; outline: none; margin-bottom: 16px; }
+        .submit-btn { background: var(--apple-blue); color: white; width: 100%; padding: 16px; border-radius: 28px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .back-btn { background: none; border: none; color: var(--apple-blue); font-size: 16px; font-weight: 600; margin-bottom: 16px; cursor: pointer; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--apple-glass); backdrop-filter: blur(20px); border-top: 1px solid rgba(0, 0, 0, 0.05); display: flex; justify-content: space-around; padding: 10px 0; z-index: 99; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--apple-text-gray); background: none; border: none; font-size: 11px; cursor: pointer; }
+        .nav-item.active { color: var(--apple-blue); }
+        .info-card { background: white; border-radius: var(--card-radius); padding: 18px; margin-bottom: 12px; }
+        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
     </style>
 </head>
 <body>
 
-    <svg style="display: none;">
-        <g id="icon-tooth"><path d="M12 2C9.5 2 7.5 3.5 7 6c-.5 2.5-2 4.5-2 7 0 3.5 2 6 4.5 6 1.5 0 2-1 2.5-1s1 1 2.5 1c2.5 0 4.5-2.5 4.5-6 0-2.5-1.5-4.5-2-7-.5-2.5-2.5-4-5-4zm-2 5c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></g>
-        <g id="icon-home"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></g>
-        <g id="icon-calendar"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></g>
-        <g id="icon-address"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></g>
-        <g id="icon-chevron"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></g>
-        <g id="icon-user"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z"/></g>
-    </svg>
-
-    <header>
-        <div class="logo-area" onclick="switchPage('home')">
-            <h1>Dental clinic</h1>
-        </div>
-    </header>
+    <header><div class="logo-area" onclick="switchPage('home')"><h1>Dental clinic</h1></div></header>
 
     <div class="container">
-
-        <!-- BOSH SAHIFA -->
         <div id="home" class="page active">
-            <div class="hero-banner">
-                <h2>Mukammal Tabassum</h2>
-                <p>Premium darajadagi zamonaviy, og'riqsiz stomatologiya xizmati.</p>
-                <div class="bio-box">
-                    Klinikamiz ko'p yillik tajribaga ega shifokorlar bilan tishlaringiz salomatligini ishonchli himoya qiladi.
-                </div>
-            </div>
-
-            <button class="apple-card-btn" onclick="switchPage('booking')">
-                <div class="btn-main-info">
-                    <div class="btn-circle-icon ic-blue">
-                        <svg class="icon"><use href="#icon-calendar"/></svg>
-                    </div>
-                    <div>
-                        <div class="btn-txt-title">Onlayn Navbat</div>
-                        <div class="btn-txt-desc">Sana va vaqtni tanlab joy band qilish</div>
-                    </div>
-                </div>
-                <svg class="icon" style="color:#c7c7cc; width:16px;"><use href="#icon-chevron"/></svg>
-            </button>
-
-            <button class="apple-card-btn" onclick="switchPage('services')">
-                <div class="btn-main-info">
-                    <div class="btn-circle-icon ic-purple">
-                        <svg class="icon"><use href="#icon-tooth"/></svg>
-                    </div>
-                    <div>
-                        <div class="btn-txt-title">Xizmatlar va Narxlar</div>
-                        <div class="btn-txt-desc">Muolajalar turi va narxlari ro'yxati</div>
-                    </div>
-                </div>
-                <svg class="icon" style="color:#c7c7cc; width:16px;"><use href="#icon-chevron"/></svg>
-            </button>
-
-            <button class="apple-card-btn" onclick="switchPage('contacts')">
-                <div class="btn-main-info">
-                    <div class="btn-circle-icon ic-orange">
-                        <svg class="icon"><use href="#icon-address"/></svg>
-                    </div>
-                    <div>
-                        <div class="btn-txt-title">Klinika va Shifokorlar</div>
-                        <div class="btn-txt-desc">Mutaxassislarimiz va manzil ma'lumotlari</div>
-                    </div>
-                </div>
-                <svg class="icon" style="color:#c7c7cc; width:16px;"><use href="#icon-chevron"/></svg>
-            </button>
+            <div class="hero-banner"><h2>Mukammal Tabassum</h2><p>Premium darajadagi stomatologiya.</p></div>
+            <button class="apple-card-btn" onclick="switchPage('booking')">Navbatga yozilish</button>
+            <button class="apple-card-btn" onclick="switchPage('services')">Xizmatlar</button>
+            <button class="apple-card-btn" onclick="switchPage('contacts')">Kontaktlar</button>
         </div>
 
-        <!-- NAVBATGA YOZILISH -->
         <div id="booking" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
-            <div class="info-card" style="background: linear-gradient(135deg, #0071e3, #005bb5); color: white;">
-                <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Tezkor Navbat Tizimi</h3>
-                <p style="font-size:13px; opacity:0.9;">Navbat ma'lumotlari xavfsiz va tekshiruvlar asosida Google Excel jadvaliga saqlanadi.</p>
-            </div>
-
             <form id="appointmentForm" onsubmit="sendData(event)">
-                <div class="form-group">
-                    <label>Ismingiz va Familiyangiz</label>
-                    <input type="text" id="userName" class="apple-input" placeholder="Masalan: Aziz Rahimov" required>
-                </div>
-                <div class="form-group">
-                    <label>Telefon raqamingiz</label>
-                    <input type="tel" id="userPhone" class="apple-input" value="+998 " required>
-                </div>
-                <div class="form-group">
-                    <label>Yashash manzilingiz</label>
-                    <input type="text" id="userAddress" class="apple-input" placeholder="Toshkent shahri" required>
-                </div>
-                <div class="form-group">
-                    <label>Xizmat turi</label>
-                    <select id="serviceTypeSelect">
-                        <option>Konsultatsiya va ko'rik</option>
-                        <option>Tishlarni davolash (Plomba)</option>
-                        <option>Implant o'rnatish</option>
-                        <option>Tish tozalash va oqartirish</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sana va Vaqtni tanlang</label>
-                    <div class="flex-inputs">
-                        <input type="date" id="bookDate" class="apple-input" required>
-                        <input type="time" id="bookTime" class="apple-input" required>
-                    </div>
-                </div>
+                <input type="text" id="userName" class="apple-input" placeholder="Ism Familiya" required>
+                <input type="tel" id="userPhone" class="apple-input" value="+998 " required>
+                <input type="text" id="userAddress" class="apple-input" placeholder="Manzil" required>
+                <select id="serviceTypeSelect" class="apple-input">
+                    <option>Konsultatsiya</option>
+                    <option>Davolash (Plomba)</option>
+                    <option>Implant</option>
+                </select>
+                <input type="date" id="bookDate" class="apple-input" required>
+                <input type="time" id="bookTime" class="apple-input" required>
                 <button type="submit" class="submit-btn" id="submitBtn">Navbatni Tasdiqlash</button>
             </form>
         </div>
 
-        <!-- XIZMATLAR -->
         <div id="services" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
-            <h3 style="font-size: 20px; margin-bottom: 14px; font-weight:700;">Xizmat ko'rsatish turlari</h3>
             <div class="info-card">
-                <div class="info-row"><span class="info-label">Konsultatsiya va ko'rik</span><span class="info-value">Bepul</span></div>
-                <div class="info-row"><span class="info-label">Tishlarni davolash (Plomba)</span><span class="info-value">150 000 so'mdan</span></div>
-                <div class="info-row"><span class="info-label">Implant o'rnatish</span><span class="info-value">2 000 000 so'mdan</span></div>
-                <div class="info-row"><span class="info-label">Tish tozalash va oqartirish</span><span class="info-value">250 000 so'm</span></div>
+                <div class="info-row"><span>Konsultatsiya</span><span>Bepul</span></div>
+                <div class="info-row"><span>Plomba</span><span>150 000 so'm</span></div>
             </div>
         </div>
 
-        <!-- KONTAKTLAR -->
         <div id="contacts" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card">
-                <div class="info-title">👨‍⚕️ Bizning Shifokorlar</div>
-                <div class="doctor-row">
-                    <div class="doc-avatar-box"><svg class="icon" style="width:18px;height:18px;"><use href="#icon-user"/></svg></div>
-                    <div>
-                        <div style="font-weight:600; font-size:15px;">Dr. Shoxjahon</div>
-                        <div style="color:var(--apple-text-gray); font-size:13px;">Bosh Shifokor / Stomatolog-Ortodont</div>
-                    </div>
-                </div>
-            </div>
-            <div class="info-card">
-                <div class="info-title">✨ Klinika Ma'lumotlari</div>
-                <div class="info-row"><span class="info-label">Ish vaqti:</span><span class="info-value">7:00 - 19:00</span></div>
-                <div class="info-row"><span class="info-label">Aloqa telefoni:</span><span class="info-value">+998919677750</span></div>
-            </div>
-            <div class="action-button-group">
-                <a href="tel:+998919677750" class="act-btn" style="background:#e8f5e9; color:#34c759;">📞 Telefon Qilish</a>
-                <a href="https://maps.google.com" target="_blank" class="act-btn" style="background:#e1f5fe; color:#0288d1;">📍 Xarita (Lokatsiya)</a>
+                <div class="info-row"><span>Ish vaqti:</span><span>7:00 - 19:00</span></div>
             </div>
         </div>
-
     </div>
 
-    <!-- Pastki Navigatsiya -->
     <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchPage('home')">
-            <svg class="icon"><use href="#icon-home"/></svg><span>Asosiy</span>
-        </button>
-        <button class="nav-item" onclick="switchPage('booking')">
-            <svg class="icon"><use href="#icon-calendar"/></svg><span>Navbat</span>
-        </button>
-        <button class="nav-item" onclick="switchPage('services')">
-            <svg class="icon"><use href="#icon-tooth"/></svg><span>Xizmatlar</span>
-        </button>
-        <button class="nav-item" onclick="switchPage('contacts')">
-            <svg class="icon"><use href="#icon-address"/></svg><span>Klinika</span>
-        </button>
+        <button class="nav-item active" onclick="switchPage('home')"><span>Asosiy</span></button>
+        <button class="nav-item" onclick="switchPage('booking')"><span>Navbat</span></button>
+        <button class="nav-item" onclick="switchPage('services')"><span>Xizmatlar</span></button>
+        <button class="nav-item" onclick="switchPage('contacts')"><span>Klinika</span></button>
     </div>
 
     <script>
         const SHEETDB_URL = 'https://sheetdb.io/api/v1/e9nazronnimq3'; 
 
         function switchPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if(pageId === 'home') document.querySelectorAll('.nav-item')[0].classList.add('active');
-            if(pageId === 'booking') document.querySelectorAll('.nav-item')[1].classList.add('active');
-            if(pageId === 'services') document.querySelectorAll('.nav-item')[2].classList.add('active');
-            if(pageId === 'contacts') document.querySelectorAll('.nav-item')[3].classList.add('active');
-            window.scrollTo(0,0);
         }
-
-        document.getElementById('userPhone').addEventListener('input', function (e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            if (!x[1]) { e.target.value = '+998 '; return; }
-            e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
-        });
 
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Tekshirilmoqda...";
+            btn.innerText = "Yuborilmoqda...";
             btn.disabled = true;
 
-            const name = document.getElementById('userName').value;
-            const phone = document.getElementById('userPhone').value;
-            const address = document.getElementById('userAddress').value;
-            const service = document.getElementById('serviceTypeSelect').value;
             const date = document.getElementById('bookDate').value;
-            const time = document.getElementById('bookTime').value;
-
-            // 🛠️ O'zbekiston vaqti bilan tekshirish algoritmi
-            const now = new Date();
-            const selectedDateTime = new Date(`${date}T${time}`);
+            const rawTime = document.getElementById('bookTime').value;
             
-            // Hozirgi vaqtdan 5 daqiqa buffer beramiz (mijoz formani to'ldirgunicha vaqt o'tib ketishi hisobiga)
-            const checkNow = new Date(now.getTime() - 5 * 60 * 1000);
+            // VAQTNI 24 SOATLIK FORMATGA O'TKAZUVCHI ALGORITM
+            let [hours, minutes] = rawTime.split(':').map(Number);
+            if (hours >= 1 && hours < 7) { hours += 12; }
+            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+            
+            const selectedDateTime = new Date(`${date}T${formattedTime}:00`);
+            const now = new Date();
 
-            if (selectedDateTime < checkNow) {
-                alert("⚠️ O'tib ketgan vaqtga yoki o'tmishdagi sanaga navbat ololmaysiz! Iltimos, joriy vaqtdan keyingi soatni tanlang.");
+            if (selectedDateTime < now) {
+                alert("⚠️ O'tib ketgan vaqt! Iltimos, kelajakdagi vaqtni tanlang.");
                 btn.innerText = "Navbatni Tasdiqlash";
                 btn.disabled = false;
                 return;
             }
 
-            const cleanPhone = phone.replace(/\D/g, '');
+            const formData = { data: [{
+                name: document.getElementById('userName').value,
+                phone: document.getElementById('userPhone').value,
+                address: document.getElementById('userAddress').value,
+                service: document.getElementById('serviceTypeSelect').value,
+                date: date,
+                time: formattedTime
+            }]};
 
-            fetch(SHEETDB_URL)
-            .then(res => res.json())
-            .then(existingAppointments => {
-                if (Array.isArray(existingAppointments)) {
-                    const oneHourInMs = 60 * 60 * 1000; 
-
-                    for (let app of existingAppointments) {
-                        if (app.date && app.time) { 
-                            const appDateTime = new Date(`${app.date}T${app.time}`);
-                            const timeDiff = Math.abs(selectedDateTime - appDateTime);
-
-                            if (timeDiff < oneHourInMs) {
-                                alert(`⚠️ Kechirasiz, bu vaqt band yoki boshqa bemorning vaqtiga juda yaqin (${app.time} da navbat bor). Har bir bemor orasida kamida 1 soat farq bo'lishi kerak!`);
-                                btn.innerText = "Navbatni Tasdiqlash";
-                                btn.disabled = false;
-                                return; 
-                            }
-                        }
-                    }
-                }
-
-                btn.innerText = "Yuborilmoqda...";
-                const formData = {
-                    data: [
-                        {
-                            name: name,
-                            phone: cleanPhone,
-                            address: address,
-                            service: service,
-                            date: date, 
-                            time: time
-                        }
-                    ]
-                };
-
-                return fetch(SHEETDB_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
+            fetch(SHEETDB_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
             })
-            .then(res => {
-                if(res) {
-                    if (!res.ok) throw new Error();
-                    alert('✅ Rahmat! Navbatingiz muvaffaqiyatli qabul qilindi.');
-                    document.getElementById('appointmentForm').reset();
-                    document.getElementById('userPhone').value = '+998 ';
-                    switchPage('home');
-                }
-            })
-            .catch(() => {
-                alert('⚠️ Xatolik yuz berdi. Tarmoqni tekshiring yoki qaytadan urunib ko\'ring.');
-            })
+            .then(res => res.ok ? alert('✅ Navbat qabul qilindi!') : alert('⚠️ Xatolik!'))
+            .catch(() => alert('⚠️ Tarmoq xatosi!'))
             .finally(() => {
                 btn.innerText = "Navbatni Tasdiqlash";
                 btn.disabled = false;
+                document.getElementById('appointmentForm').reset();
+                switchPage('home');
             });
         }
-
-        // Kalendarda bugun va kelgusi kunlarni ochish
-        const localNow = new Date();
-        const year = localNow.getFullYear();
-        const month = String(localNow.getMonth() + 1).padStart(2, '0');
-        const day = String(localNow.getDate()).padStart(2, '0');
-        document.getElementById('bookDate').setAttribute('min', `${year}-${month}-${day}`);
+        document.getElementById('bookDate').valueAsDate = new Date();
     </script>
 </body>
 </html>
