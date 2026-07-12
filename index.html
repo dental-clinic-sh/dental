@@ -1,149 +1,94 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental Clinic | Premium Dental Clinic</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --apple-bg: #f5f5f7;
-            --apple-blue: #0071e3;
-            --apple-blue-light: #e3f2fd;
-            --apple-glass: rgba(255, 255, 255, 0.85);
-            --apple-text: #1d1d1f;
-            --apple-text-gray: #86868b;
-            --card-radius: 22px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'SF Pro Display', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--apple-bg); color: var(--apple-text); padding-bottom: 100px; overflow-x: hidden; }
-        header { position: sticky; top: 0; background: var(--apple-glass); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); z-index: 100; padding: 16px 20px; display: flex; align-items: center; }
-        .logo-area h1 { font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #0071e3, #00b4d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .container { max-width: 500px; margin: 0 auto; padding: 16px; }
-        .page { display: none; }
-        .page.active { display: block; }
-        .hero-banner { background: white; border-radius: var(--card-radius); padding: 28px 20px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.02); margin-bottom: 20px; }
-        .apple-card-btn { display: flex; align-items: center; justify-content: space-between; background: white; padding: 20px; border-radius: var(--card-radius); margin-bottom: 12px; cursor: pointer; border: 1px solid rgba(0,0,0,0.03); }
-        .apple-input { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #d2d2d7; background: white; font-size: 16px; outline: none; margin-bottom: 16px; }
-        .submit-btn { background: var(--apple-blue); color: white; width: 100%; padding: 16px; border-radius: 28px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
-        .back-btn { background: none; border: none; color: var(--apple-blue); font-size: 16px; font-weight: 600; margin-bottom: 16px; cursor: pointer; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--apple-glass); backdrop-filter: blur(20px); border-top: 1px solid rgba(0, 0, 0, 0.05); display: flex; justify-content: space-around; padding: 10px 0; z-index: 99; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--apple-text-gray); background: none; border: none; font-size: 11px; cursor: pointer; }
-        .nav-item.active { color: var(--apple-blue); }
-        .info-card { background: white; border-radius: var(--card-radius); padding: 18px; margin-bottom: 12px; }
-        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
-    </style>
+<title>Dental Clinic | Premium Stomatologiya</title>
+
+<meta name="description" content="Dental Clinic - Zamonaviy stomatologiya. Implant, breket, ortodontiya, bolalar stomatologiyasi va boshqa xizmatlar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
+
 <body>
 
-    <header><div class="logo-area" onclick="switchPage('home')"><h1>Dental clinic</h1></div></header>
+<header>
 
-    <div class="container">
-        <div id="home" class="page active">
-            <div class="hero-banner"><h2>Mukammal Tabassum</h2><p>Premium darajadagi stomatologiya.</p></div>
-            <button class="apple-card-btn" onclick="switchPage('booking')">Navbatga yozilish</button>
-            <button class="apple-card-btn" onclick="switchPage('services')">Xizmatlar</button>
-            <button class="apple-card-btn" onclick="switchPage('contacts')">Kontaktlar</button>
-        </div>
+<div class="logo">
+🦷 Dental Clinic
+</div>
 
-        <div id="booking" class="page">
-            <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
-            <form id="appointmentForm" onsubmit="sendData(event)">
-                <input type="text" id="userName" class="apple-input" placeholder="Ism Familiya" required>
-                <input type="tel" id="userPhone" class="apple-input" value="+998 " required>
-                <input type="text" id="userAddress" class="apple-input" placeholder="Manzil" required>
-                <select id="serviceTypeSelect" class="apple-input">
-                    <option>Konsultatsiya</option>
-                    <option>Davolash (Plomba)</option>
-                    <option>Implant</option>
-                </select>
-                <input type="date" id="bookDate" class="apple-input" required>
-                <input type="time" id="bookTime" class="apple-input" required>
-                <button type="submit" class="submit-btn" id="submitBtn">Navbatni Tasdiqlash</button>
-            </form>
-        </div>
+<nav>
 
-        <div id="services" class="page">
-            <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
-            <div class="info-card">
-                <div class="info-row"><span>Konsultatsiya</span><span>Bepul</span></div>
-                <div class="info-row"><span>Plomba</span><span>150 000 so'm</span></div>
-            </div>
-        </div>
+<a href="#home">Bosh sahifa</a>
 
-        <div id="contacts" class="page">
-            <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
-            <div class="info-card">
-                <div class="info-row"><span>Ish vaqti:</span><span>7:00 - 19:00</span></div>
-            </div>
-        </div>
-    </div>
+<a href="#about">Doktor</a>
 
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchPage('home')"><span>Asosiy</span></button>
-        <button class="nav-item" onclick="switchPage('booking')"><span>Navbat</span></button>
-        <button class="nav-item" onclick="switchPage('services')"><span>Xizmatlar</span></button>
-        <button class="nav-item" onclick="switchPage('contacts')"><span>Klinika</span></button>
-    </div>
+<a href="#services">Xizmatlar</a>
 
-    <script>
-        const SHEETDB_URL = 'https://sheetdb.io/api/v1/e9nazronnimq3'; 
+<a href="#booking">Qabul</a>
 
-        function switchPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-        }
+<a href="#contact">Bog'lanish</a>
 
-        function sendData(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "Yuborilmoqda...";
-            btn.disabled = true;
+</nav>
 
-            const date = document.getElementById('bookDate').value;
-            const rawTime = document.getElementById('bookTime').value;
-            
-            // VAQTNI 24 SOATLIK FORMATGA O'TKAZUVCHI ALGORITM
-            let [hours, minutes] = rawTime.split(':').map(Number);
-            if (hours >= 1 && hours < 7) { hours += 12; }
-            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-            
-            const selectedDateTime = new Date(`${date}T${formattedTime}:00`);
-            const now = new Date();
+<a href="tel:+998919677750" class="call-btn">
+<i class="fa-solid fa-phone"></i>
+Qo'ng'iroq
+</a>
 
-            if (selectedDateTime < now) {
-                alert("⚠️ O'tib ketgan vaqt! Iltimos, kelajakdagi vaqtni tanlang.");
-                btn.innerText = "Navbatni Tasdiqlash";
-                btn.disabled = false;
-                return;
-            }
+</header>
 
-            const formData = { data: [{
-                name: document.getElementById('userName').value,
-                phone: document.getElementById('userPhone').value,
-                address: document.getElementById('userAddress').value,
-                service: document.getElementById('serviceTypeSelect').value,
-                date: date,
-                time: formattedTime
-            }]};
+<section class="hero" id="home">
 
-            fetch(SHEETDB_URL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(formData)
-            })
-            .then(res => res.ok ? alert('✅ Navbat qabul qilindi!') : alert('⚠️ Xatolik!'))
-            .catch(() => alert('⚠️ Tarmoq xatosi!'))
-            .finally(() => {
-                btn.innerText = "Navbatni Tasdiqlash";
-                btn.disabled = false;
-                document.getElementById('appointmentForm').reset();
-                switchPage('home');
-            });
-        }
-        document.getElementById('bookDate').valueAsDate = new Date();
-    </script>
-</body>
-</html>
+<div class="hero-text">
+
+<h1>
+Sog'lom tabassum
+hayotingizni o'zgartiradi
+</h1>
+
+<p>
+
+Dental Clinic —
+zamonaviy stomatologiya markazi.
+
+Implantologiya,
+terapiya,
+ortodontiya,
+bolalar stomatologiyasi
+va professional davolash.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#booking" class="btn">
+Qabulga yozilish
+</a>
+
+<a href="#services" class="btn-outline">
+Xizmatlar
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900" alt="Dental Clinic">
+
+</div>
+
+</section>
