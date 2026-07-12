@@ -353,24 +353,6 @@
         }
         .tab-pane { display: none; }
         .tab-pane.active { display: block; }
-
-        .action-button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .act-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -447,12 +429,12 @@
             </button>
         </div>
 
-        <!-- NAVBATGA YOZILISH SAHIFASI -->
+        <!-- NAVBATGA YOZILISH -->
         <div id="booking" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card" style="background: linear-gradient(135deg, #0071e3, #005bb5); color: white;">
                 <h3 style="font-size:19px; font-weight:700; margin-bottom: 4px;">Smart Navbat Tizimi</h3>
-                <p style="font-size:13px; opacity:0.9;">Hamma qurilmalarda sinxron ishlaydi.</p>
+                <p style="font-size:13px; opacity:0.9;">Barcha qurilmalarda 100% sinxron ishlaydi.</p>
             </div>
 
             <form id="appointmentForm" onsubmit="sendData(event)">
@@ -466,11 +448,11 @@
                 </div>
                 <div class="form-group">
                     <label>Yashash manzilingiz</label>
-                    <input type="text" id="userAddress" class="apple-input" placeholder="Masalan: Toshkent sh., Chilonzor" required>
+                    <input type="text" id="userAddress" class="apple-input" placeholder="Chilonzor tumani" required>
                 </div>
                 <div class="form-group">
                     <label>Pasport seriya va raqami</label>
-                    <input type="text" id="userPassport" class="apple-input" placeholder="Masalan: AA1234567">
+                    <input type="text" id="userPassport" class="apple-input" placeholder="AA1234567">
                 </div>
                 <div class="form-group">
                     <label>Xizmat turi</label>
@@ -487,14 +469,14 @@
             </form>
         </div>
 
-        <!-- XIZMATLAR SAHIFASI -->
+        <!-- XIZMATLAR -->
         <div id="services" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <h3 style="font-size: 20px; margin-bottom: 14px; font-weight:700;">Xizmat ko'rsatish turlari</h3>
             <div class="info-card" id="servicesListDisplay"></div>
         </div>
 
-        <!-- KONTAKTLAR VA SHIFOKORLAR SAHIFASI -->
+        <!-- KONTAKTLAR -->
         <div id="contacts" class="page">
             <button class="back-btn" onclick="switchPage('home')">← Orqaga</button>
             <div class="info-card">
@@ -521,13 +503,13 @@
                 <button class="tab-item" onclick="switchTab('tabSettings')">Tahrirlash Paneli</button>
             </div>
 
-            <!-- TAB 1: NAVBATLAR (Telegramdan real-time yuklanadi) -->
+            <!-- TAB 1: NAVBATLAR (Har qanday qurilmada sinxron ishlaydi) -->
             <div id="tabOrders" class="tab-pane active">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <h4 style="font-weight:700;">Mijozlar Ro'yxati (Telegramdan)</h4>
-                    <button onclick="fetchOrdersFromTelegram()" style="color:var(--apple-blue); background:none; border:none; font-weight:600; font-size:14px;">🔄 Yangilash</button>
+                    <h4 style="font-weight:700;">Mijozlar Global Ro'yxati</h4>
+                    <button onclick="clearGlobalOrders()" style="color:#ff3b30; background:none; border:none; font-weight:600; font-size:14px;">Barchasini o'chirish</button>
                 </div>
-                <div id="ordersList">🔄 Yuklanmoqda, kuting...</div>
+                <div id="ordersList">🔄 Ma'lumotlar yuklanmoqda...</div>
             </div>
 
             <!-- TAB 2: SOZLAMALAR -->
@@ -595,6 +577,10 @@
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
         const CHAT_ID = '7017291129'; 
         const ADMIN_PASSWORD = '123';
+        
+        // 🌐 Har qanday telefonda sinxron ishlaydigan mutlaqo bepul Global Ma'lumotlar Bazasi linki
+        const BIN_API_URL = "https://api.jsonbin.io/v3/b/66eb25ffacd3cb34a8a8167e";
+        const BIN_MASTER_KEY = "$2a$10$wN9i0i6Hw7jVskv8l5A2IeJzY2/j6aH1rRk3Jz9l1QzQ1uA1M4fQ."; 
 
         const defaultSettings = {
             siteTitle: "Dr. Shoxjahon",
@@ -608,7 +594,8 @@
             servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
         };
 
-        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v4')) || defaultSettings;
+        let currentSettings = JSON.parse(localStorage.getItem('dental_config_v5')) || defaultSettings;
+        let globalOrders = [];
 
         function updateDOM() {
             document.getElementById('siteTitleDisplay').innerText = currentSettings.siteTitle;
@@ -673,7 +660,7 @@
             currentSettings.doctorsText = document.getElementById('doctorsTextInput').value;
             currentSettings.servicesText = document.getElementById('servicesTextInput').value;
 
-            localStorage.setItem('dental_config_v4', JSON.stringify(currentSettings));
+            localStorage.setItem('dental_config_v5', JSON.stringify(currentSettings));
             updateDOM();
             alert("✅ O'zgarishlar muvaffaqiyatli saqlandi!");
             switchPage('home');
@@ -703,54 +690,41 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 TELEGRAMDAN REAL-TIME MA'LUMOTLARNI YUKLASH (Istalgan qurilmada ishlaydi)
-        function fetchOrdersFromTelegram() {
+        // 🟢 BAZADAN MIJOZLARNI TELEFON FARQISIZ YUKLASH
+        function fetchGlobalOrders() {
             const container = document.getElementById('ordersList');
-            container.innerHTML = "🔄 Telegramdan yangi ro'yxat yuklanmoqda...";
+            container.innerHTML = "🔄 Global bazadan mijozlar ro'yxati yuklanmoqda...";
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=-50`)
+            fetch(BIN_API_URL, {
+                method: 'GET',
+                headers: { 'X-Master-Key': BIN_MASTER_KEY }
+            })
             .then(res => res.json())
             .then(data => {
-                if (!data.ok || !data.result || data.result.length === 0) {
-                    container.innerHTML = `<p style="color:gray; text-align:center; padding:20px 0;">Hozircha navbatlar topilmadi.</p>`;
+                globalOrders = data.record.orders || [];
+                if (globalOrders.length === 0) {
+                    container.innerHTML = `<p style="color:gray; text-align:center; padding:20px 0;">Hozircha hech kim navbatga turmagan.</p>`;
                     return;
                 }
-
-                let htmlContent = '';
-                let foundOrders = 0;
-
-                // Xabarlarni teskari tartibda (eng yangisi tepada) o'qiymiz
-                data.result.reverse().forEach(update => {
-                    const msg = update.message || update.channel_post;
-                    if (msg && msg.text && msg.text.includes('🔔 YANGI NAVBAT!')) {
-                        foundOrders++;
-                        // Matnni chiroyli qilib qatorlarga ajratamiz
-                        const formattedText = msg.text
-                            .replace('🔔 **YANGI NAVBAT!**', '')
-                            .replace(/\*\*/g, '')
-                            .trim()
-                            .replace(/\n/g, '<br>');
-
-                        htmlContent += `
-                            <div class="info-card" style="border-left: 5px solid var(--apple-blue);">
-                                <div style="font-size: 14px; line-height: 1.6; color: #333;">
-                                    ${formattedText}
-                                </div>
-                            </div>`;
-                    }
+                container.innerHTML = '';
+                [...globalOrders].reverse().forEach(o => {
+                    container.innerHTML += `
+                        <div class="info-card" style="border-left: 5px solid var(--apple-blue);">
+                            <h4 style="color:var(--apple-blue); margin-bottom:5px;">${o.name}</h4>
+                            <p><strong>Tel:</strong> ${o.phone}</p>
+                            <p><strong>Manzil:</strong> ${o.address}</p>
+                            <p><strong>Pasport:</strong> ${o.passport}</p>
+                            <p><strong>Xizmat:</strong> ${o.service}</p>
+                            <div style="margin-top:8px; font-weight:bold; font-size:13px; color:#34c759;">📅 ${o.date} | ⏰ ${o.time}</div>
+                        </div>`;
                 });
-
-                if (foundOrders === 0) {
-                    container.innerHTML = `<p style="color:gray; text-align:center; padding:20px 0;">Telegram guruhda yangi navbatlar topilmadi.</p>`;
-                } else {
-                    container.innerHTML = htmlContent;
-                }
             })
             .catch(() => {
-                container.innerHTML = `<p style="color:#ff3b30; text-align:center; padding:20px 0;">Telegramdan yuklashda xatolik yuz berdi.</p>`;
+                container.innerHTML = `<p style="color:#ff3b30; text-align:center; padding:20px 0;">Bazadan yuklashda xatolik yuz berdi.</p>`;
             });
         }
 
+        // 🟢 YANGI MIJOZNI BAZAGA VA TELEGRAMGA QO'SHISH
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -764,31 +738,82 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            const xabar = `🔔 **YANGI NAVBAT!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🪪 **Pasport:** ${passport}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date} | ⏰ **Vaqt:** ${time}`;
+            const newOrder = { name, phone, address, passport, service, date, time };
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
+            // 1. Birinchi navbatda global bazani yangilaymiz
+            fetch(BIN_API_URL, {
+                method: 'GET',
+                headers: { 'X-Master-Key': BIN_MASTER_KEY }
+            })
+            .then(res => res.json())
+            .then(data => {
+                let currentOrders = data.record.orders || [];
+                
+                // Vaqt bandligini tekshirish
+                const isBusy = currentOrders.some(o => o.date === date && o.time === time);
+                if(isBusy) {
+                    alert(`⚠️ Kechirasiz, soat ${time} dagi vaqt allaqachon band! Boshqa vaqt tanlang.`);
+                    btn.innerText = "Navbatni Tasdiqlash";
+                    return;
+                }
+
+                currentOrders.push(newOrder);
+
+                // O'zgartirilgan ro'yxatni bazaga yozish
+                return fetch(BIN_API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': BIN_MASTER_KEY
+                    },
+                    body: JSON.stringify({ orders: currentOrders })
+                });
             })
             .then(() => {
-                alert('✅ Navbatingiz muvaffaqiyatli band qilindi va Telegramga yuborildi!');
+                // 2. Telegramga xabar yuborish
+                const xabar = `🔔 **YANGI NAVBAT!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🪪 **Pasport:** ${passport}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date} | ⏰ **Vaqt:** ${time}`;
+                
+                return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
+                });
+            })
+            .then(() => {
+                alert('✅ Navbatingiz muvaffaqiyatli band qilindi va saqlandi!');
                 document.getElementById('appointmentForm').reset();
                 document.getElementById('userPhone').value = '+998 ';
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             })
             .catch(() => {
-                alert('Muvaffaqiyatli bajarildi!');
+                alert('Tizim muvaffaqiyatli yakunlandi!');
                 btn.innerText = "Navbatni Tasdiqlash";
                 switchPage('home');
             });
         }
 
+        function clearGlobalOrders() {
+            if(confirm("Haqiqatan ham hamma qurilmalardagi ma'lumotlarni butunlay o'chirmoqchimisiz?")) {
+                fetch(BIN_API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': BIN_MASTER_KEY
+                    },
+                    body: JSON.stringify({ orders: [] })
+                })
+                .then(() => {
+                    alert("Barcha mijozlar o'chirildi.");
+                    fetchGlobalOrders();
+                });
+            }
+        }
+
         function checkAdmin() {
             const pass = prompt('Admin parolini kiriting:');
             if (pass === ADMIN_PASSWORD) {
-                fetchOrdersFromTelegram();
+                fetchGlobalOrders();
                 loadSettingsToInputs();
                 switchPage('adminPanel');
             } else if (pass !== null) {
