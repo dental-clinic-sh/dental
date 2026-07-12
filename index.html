@@ -542,7 +542,6 @@
     </div>
 
     <script>
-        // 🛠️ GOOGLE SHEETS JADVALI UCHUN SHEETDB HAVOLASI JOYLASHDI:
         const SHEETDB_URL = 'https://sheetdb.io/api/v1/e9nazronnimq3'; 
         const ADMIN_PASSWORD = '123';
 
@@ -555,7 +554,7 @@
             clinicPhone: "+998919677750",
             locationUrl: "https://maps.google.com",
             doctorsText: "Dr. Shoxjahon Latifova = Bosh Shifokor / Ortodont\nDr. Azizov Bexruz = Xirurg / Implantolog",
-            servicesText: "Konsultatsiya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
+            servicesText: "Konsulturaliya va ko'rik = Bepul\nTishlarni davolash (Plomba) = 150 000 so'mdan\nImplant o'rnatish = 2 000 000 so'mdan"
         };
 
         let currentSettings = JSON.parse(localStorage.getItem('dental_config_v9')) || defaultSettings;
@@ -646,7 +645,6 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 GOOGLE SHEETS'GA MA'LUMOT YUBORISH FUNKSIYASI
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -659,11 +657,14 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
+            // 🛠️ Telefon raqami boshiga tekis matn bo'lishi uchun jadvallarga maxsus qo'shtirnoq belgisi qo'shildi
+            const safePhone = "'" + phone;
+
             const formData = {
                 data: [
                     {
                         name: name,
-                        phone: phone,
+                        phone: safePhone,
                         address: address,
                         service: service,
                         date: date,
