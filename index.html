@@ -40,13 +40,14 @@
             vertical-align: middle;
         }
 
-        /* 🖼️ DUMALOQ LOGO RASMI UCHUN STIL */
+        /* 🖼️ YANGI LOGOTIP RASMI UCHUN PROFESSIONAL STIL */
         .logo-img {
-            width: 35px;
-            height: 35px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--apple-blue-light);
+            background-color: #white;
         }
 
         header {
@@ -352,8 +353,8 @@
 
     <header>
         <div class="logo-area" onclick="switchPage('home')">
-            <!-- 🔗 Siz yuborgan rasmdan olingan to'g'ridan-to'g'ri havola -->
-            <img class="logo-img" src="https://i.ibb.co/Y7FvN2D2/image.png" alt="Logo">
+            <!-- 🔗 Siz hozirgina yuborgan haqiqiy yangi logotip havolasi joylandi -->
+            <img class="logo-img" src="https://i.ibb.co/rK36wMvM/45963.jpg" alt="Dental Clinic Logo">
             <h1>Dental clinic</h1>
         </div>
     </header>
@@ -560,7 +561,6 @@
                     const oneHourInMs = 60 * 60 * 1000; 
 
                     for (let app of existingAppointments) {
-                        // Diqqat: Agar jadvalda ustun nomi 'data' bo'lsa -> app.data deb o'zgartiring
                         if (app.date && app.time) { 
                             const appDateTime = new Date(`${app.date}T${app.time}`);
                             const timeDiff = Math.abs(selectedDateTime - appDateTime);
@@ -575,7 +575,7 @@
                     }
                 }
 
-                // Hamma tekshiruvlar yaxshi o'tsa -> yuborish
+                // Hamma tekshiruvlar muvaffaqiyatli o'tsa -> yuborish
                 btn.innerText = "Yuborilmoqda...";
                 const formData = {
                     data: [
@@ -584,7 +584,7 @@
                             phone: cleanPhone,
                             address: address,
                             service: service,
-                            date: date, // Ustun nomi 'data' bo'lsa -> data: date qiling
+                            date: date, 
                             time: time
                         }
                     ]
