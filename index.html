@@ -544,7 +544,7 @@
     <script>
         // 💬 Telegram Bot va Guruh Sozlamalari (To'liq sozlangan)
         const BOT_TOKEN = '7611849187:AAH0qV_89f074N4S2R6-n13P99_4_yR2u2I'; 
-        const CHAT_ID = '-1004317265736'; // Sizning guruhingiz IDsi
+        const CHAT_ID = '-1004317265736'; // Guruh IDsi
         const ADMIN_PASSWORD = '123';
 
         const defaultSettings = {
@@ -647,7 +647,7 @@
             e.target.value = '+998 ' + (x[2] ? '(' + x[2] + ') ' : '') + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
         });
 
-        // 🟢 NAVBAT MA'LUMOTLARINI GURUXGA YUBORISH
+        // 🟢 NAVBAT MA'LUMOTLARINI GURUXGA YUBORISH (YANGI HTML FORMAT)
         function sendData(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -660,13 +660,23 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // Xabarni chiroyli formatda tayyorlash
-            const xabar = `🔔 **YANGI BEMOR NAVBATI!**\n\n👤 **Bemor:** ${name}\n📞 **Tel:** ${phone}\n📍 **Manzil:** ${address}\n🦷 **Xizmat:** ${service}\n📅 **Sana:** ${date}\n⏰ **Vaqt:** ${time}`;
+            // Xabarni Telegramga xatosiz yuborish uchun HTML formatga o'tkazdik
+            const xabar = `<b>🔔 YANGI BEMOR NAVBATI!</b>\n\n` +
+                          `<b>👤 Bemor:</b> ${name}\n` +
+                          `<b>📞 Tel:</b> ${phone}\n` +
+                          `<b>📍 Manzil:</b> ${address}\n` +
+                          `<b>🦷 Xizmat:</b> ${service}\n` +
+                          `<b>📅 Sana:</b> ${date}\n` +
+                          `<b>⏰ Vaqt:</b> ${time}`;
             
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: xabar, parse_mode: "Markdown" })
+                body: JSON.stringify({ 
+                    chat_id: CHAT_ID, 
+                    text: xabar, 
+                    parse_mode: "HTML" // HTML har doim xatosiz ishlaydi
+                })
             })
             .then(res => {
                 if (!res.ok) throw new Error();
